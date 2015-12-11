@@ -8,7 +8,7 @@ var app = express();
 var path = require('path');
 
 // This is the secret used to sign our token
-var secret = "mysupersecretpassword";
+var secret = "thesecretgarden";
 // This connects to MongoDB
 mongoose.connect('mongodb://localhost:27017/gardens');
 
@@ -21,18 +21,18 @@ app.use(bodyParser.urlencoded({extended: false})); //what is this line of code
 
 // This restricts anything in this path, except POST
 
-// app.use('/api/users', expressJWT( //request must go through the secret: secret and pass otherwise breaks
-//     {
-//       secret: secret
-//     }
-//   ).unless( // only allows us to POST or CREATE A USER without expressJWT
-//     {
-//       method: "POST",
-//     }
-//   )
-// );
+app.use('/api/users', expressJWT( //request must go through the secret: secret and pass otherwise breaks
+    {
+      secret: secret
+    }
+  ).unless( // only allows us to POST or CREATE A USER without expressJWT
+    {
+      method: "POST",
+    }
+  )
+);
 
-
+app.use('/api/gardens', expressJWT({secret: secret}));
 
 app.use('/api/gardens', require('./controllers/gardens.js'));
 

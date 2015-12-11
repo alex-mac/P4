@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html ng-app="GardenApp">
+<head>
+  <base href="/">
+  <title>Gardens</title>
+  <link rel="stylesheet" media="screen" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.2/angular.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.2/angular-route.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.8/angular-resource.js"></script>
+  <script src="app/app.js"></script>
+  <script type="text/javascript" src="app/services.js"></script>
+  <script type="text/javascript" src="app/controllers.js"></script>
+</head>
+<body>
+    <div class="container">
+      <div ng-include="'app/views/navbar.html'"></div>
+      <ng-view></ng-view>
+    </div></body>
+</html>
