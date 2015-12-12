@@ -1,10 +1,13 @@
 # P4
-Final project for WDI
+(Insert Name Here) is a collaboration between Sam French and Alex Mac to create a product in the realm of IoT (Internet of Things).
+---
 
-Screenshot
-Technologies
-Approach
-Installation instructions for any dependencies
+
+### Technologies Used
+
+Angular
+Node
+MongoDB
 
 ###User stories
 
@@ -23,3 +26,12 @@ Installation instructions for any dependencies
 Wireframes – sketches of major views / interfaces in your application
 ?? Link to your pitch deck – documentation of your wireframes, user stories, and proposed architecture
 Unsolved problems / major hurdles
+
+
+---
+Stuff to add:
+Screenshot,
+Technologies,
+Approach,
+Installation instructions for any dependencies
+
