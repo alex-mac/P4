@@ -7,7 +7,7 @@ angular.module('graphView', [])
         d3Service.d3().then(function(d3) {
 
         var margin = parseInt(attrs.margin) || 20,
-        barHeight = parseInt(attrs.barHeight) || 20,
+        barWidth = parseInt(attrs.barWidth) || 20,
         barPadding = parseInt(attrs.barPadding) || 5;
 
         var svg= d3.select(element[0])
@@ -16,10 +16,22 @@ angular.module('graphView', [])
 
         // hard-code data
         scope.data = [
-          {name: "Greg", score: 98},
-          {name: "Ari", score: 96},
+          {name: "Greg", score: 100},
+          {name: "Ari", score: 90},
+          {name: 'Q', score: 80},
+          {name: "Loser", score: 70},
+          {name: "Greg", score: 60},
+          {name: "Ari", score: 50},
+          {name: 'Q', score: 40},
+          {name: "Loser", score: 30},
+          {name: "Greg", score: 95},
+          {name: "Ari", score: 85},
           {name: 'Q', score: 75},
-          {name: "Loser", score: 48}
+          {name: "Loser", score: 65},
+          {name: "Greg", score: 55},
+          {name: "Ari", score: 45},
+          {name: 'Q', score: 35},
+          {name: "Loser", score: 25}
         ];
 
         // Browser onresize event
@@ -44,46 +56,47 @@ angular.module('graphView', [])
         if (!data) return;
          
         // setup variables
-        var width = d3.select(element[0]).node().offsetWidth - margin,
+        var height = d3.select(element[0]).node().offsetHeight - margin,
         // calculate the height
-        height = scope.data.length * (barHeight + barPadding),
+        width = scope.data.length * (barWidth + barPadding),
         // Use the category20() scale function for multicolor support
         color = d3.scale.category20(),
         // our xScale
-        xScale = d3.scale.linear()
-        .domain([0, d3.max(data, function(d) {
+        yScale = d3.scale.linear()
+        .range([d3.max(data, function(d) {
           return d.score;
-        })])
-        .range([0, width]);
+        }), 0])
+        .domain([0, height]);
          
         // set the height based on the calculations above
-        svg.attr('height', height);
+        svg.attr('width', width);
          
         //create the rectangles for the bar chart
         svg.selectAll('rect')
         .data(data).enter()
         .append('rect')
-        .attr('height', barHeight)
-        .attr('width', 140)
-        .attr('x', Math.round(margin/2))
-        .attr('y', function(d,i) {
-          return i * (barHeight + barPadding);
+        .attr('width', barWidth)
+        .attr('height', 0)
+        .attr('y', height )
+        .attr('x', function(d,i) {
+          return i * (barWidth + barPadding);
         })
         .attr('fill', function(d) { return color(d.score); })
         .transition()
         .duration(1000)
-        .attr('width', function(d) {
-          return xScale(d.score);
+        .attr('y', function(d) {
+          return height - d.score;
         })
-        svg.selectAll('text')
-        .data(data).enter()
-        .append('text')
-        .attr('height', barHeight)
-        .attr('width', 140)
-        .attr('x', Math.round(margin/2))
-        .attr('y', function(d,i) {
-          return i * (barHeight + barPadding) + 13;
-        })
+        .attr('height', function(d) { return d.score; })
+        // svg.selectAll('text')
+        // .data(data).enter()
+        // .append('text')
+        // .attr('width', barWidth)
+        // .attr('height', 140)
+        // .attr('y', Math.round(margin/2))
+        // .attr('x', function(d,i) {
+        //   return i * (barWidth + barPadding) + 13;
+        // })
         .text(function (d) {
           return d.name + "(" + d.score + ")";
         })
@@ -91,4 +104,4 @@ angular.module('graphView', [])
       })
     }
   }
-}]);
+}]); 
