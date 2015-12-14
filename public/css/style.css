@@ -1,22 +1,14 @@
-.bar {
-  fill: steelblue;
-}
-
-.bar:hover {
-  fill: brown;
-}
-
-.axis {
+.axis text {
   font: 10px sans-serif;
 }
 
-.axis path,
-.axis line {
+.axis line,
+.axis path {
   fill: none;
   stroke: #000;
   shape-rendering: crispEdges;
 }
 
-.x.axis path {
-  display: none;
+.rectangle {
+	box-sizing: border-box;
 }
