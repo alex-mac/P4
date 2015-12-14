@@ -1,4 +1,4 @@
-angular.module('GardenCtrls', ['GardenServices'])
+angular.module('GardenCtrls', ['GardenServices', 'ngAnimate', 'ui.bootstrap'])
 .controller('HomeCtrl', ['$scope', function ($scope, Garden) {
 
 }])
@@ -102,4 +102,33 @@ angular.module('GardenCtrls', ['GardenServices'])
         });
       }
     }
-  ]);
+  ])
+.controller('BootstrapCtrl', ['$scope', '$uibModal', function($scope, $uibModal) {
+  $scope.navCollapsed = true;
+
+  $scope.open = function() {
+    // console.log('modal!');
+    var modal = $uibModal.open({
+      animation: true,
+      templateUrl: '/app/views/login.html',
+      controller: 'LoginCtrl',
+      // controller: 'ModalInstanceCtrl'
+    });
+
+    modal.result.then(function(message) {
+      console.log(message);
+    });
+  };
+}])
+.controller('ModalInstanceCtrl', ['$scope', '$uibModalInstance', function($scope, $uibModalInstance) {
+  
+  $scope.message = "I'm working";
+
+  // $scope.close = function() {
+  //   $uibModalInstance.dismiss('close');
+  // };
+
+  // $scope.login = function() {
+  //   $uibModalInstance.close($scope.message);
+  // }
+}]);

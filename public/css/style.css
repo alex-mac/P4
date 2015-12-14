@@ -20,3 +20,48 @@
 .x.axis path {
   display: none;
 }
+
+/*signup navbar*/
+.navbar {
+  font-family: 'Open Sans', sans-serif;
+  border-radius: 0;
+  margin: auto;
+  background: #228617;
+  background: -webkit-linear-gradient(right, #228617 , #0A3904); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(right, #228617, #0A3904); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(right, #228617, #0A3904); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to right, #228617 , #0A3904); /* Standard syntax */
+}
+
+a {
+  color: white;
+}
+
+/*signup page*/
+.signup {
+  font-family: 'Lora', serif;
+  font-size: 16px;
+  margin: auto;
+}
+
+.signup h1 {
+  text-align: center;
+}
+
+.signup label {
+  color: gray;
+}
+
+.btn-signup {
+  font-family: 'Open Sans', sans-serif;
+  text-align: right;
+  background: #228617;
+  color: white;
+  padding: 10px
+}
+
+/*general css*/
+
+.btn {
+  border-radius: 0;
+}
