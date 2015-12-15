@@ -1,10 +1,18 @@
 <h1>Home Page</h1>
-<div class="container">
+<!-- <div class="container">
   <div d3-bars graph="sun"></div>
   <div d3-bars graph="soil"></div>
 </div>
-
-
-
+ -->
+<div id="d3line" angulard3-line-chart datajson="'sample.json'"
+                    xaxis-name = ""
+                    xaxis-pos = ""
+                    yaxis-name = "'Price($)'"
+                    yaxis-pos = "12"
+                    d3-format= "'%d-%b-%y'">
+<!-- angular directive is angulard3-line-chart -->
+<!-- directive variables are xaxis-name,yaxis-name,xaxis-pos,yaxis-pos,y axis data format(d3-format)
+and finally the datajson variable which is holding the external data source -->
+</div>
 
 <button class="btn btn-primary" ng-click="open()">Login</button>

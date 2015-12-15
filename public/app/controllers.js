@@ -56,6 +56,7 @@ angular.module('GardenCtrls', ['GardenServices', 'ngAnimate', 'ui.bootstrap'])
   '$location',
   "Auth",
   function ($scope, $http, $location, Auth) {
+    console.log("I reached the LoginCtrl");
     $scope.login = true;
     $scope.user = {
       email: "",
@@ -66,13 +67,12 @@ angular.module('GardenCtrls', ['GardenServices', 'ngAnimate', 'ui.bootstrap'])
     $scope.userAction = function () {
       $http.post("/api/auth", $scope.user).then(function success(res) {
         Auth.saveToken(res.data.token);
-        $location.path('/');
+        $location.path('/signup');
       }, function error(res) {
         console.log(res.data);
       });
     }
   }])
-
   .controller('SignupCtrl', [
     '$scope',
     '$http',
@@ -107,7 +107,7 @@ angular.module('GardenCtrls', ['GardenServices', 'ngAnimate', 'ui.bootstrap'])
   $scope.navCollapsed = true;
 
   $scope.open = function() {
-    // console.log('modal!');
+    console.log('modal!');
     var modal = $uibModal.open({
       animation: true,
       templateUrl: '/app/views/login.html',
@@ -115,9 +115,8 @@ angular.module('GardenCtrls', ['GardenServices', 'ngAnimate', 'ui.bootstrap'])
       // controller: 'ModalInstanceCtrl'
     });
 
-    modal.result.then(function(message) {
-      console.log(message);
-    });
+
+    
   };
 }])
 .controller('ModalInstanceCtrl', ['$scope', '$uibModalInstance', function($scope, $uibModalInstance) {
