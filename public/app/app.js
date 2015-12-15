@@ -5,7 +5,7 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
   $routeProvider
   .when('/', {
     templateUrl: 'app/views/index.html',
-    controller: 'HomeCtrl'
+    controller: 'BootstrapCtrl'
   }).when('/gardens', {
     templateUrl: 'app/views/gardensAll.html',
     controller: 'GardenCtrl'
@@ -23,7 +23,7 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
     controller: 'LoginCtrl'
   })
   .when('/signup', {
-    templateUrl: '/app/views/login.html',
+    templateUrl: '/app/views/signup.html',
     controller: 'SignupCtrl'
   })
   .otherwise({
