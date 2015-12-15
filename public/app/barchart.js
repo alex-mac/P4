@@ -23,6 +23,13 @@ angular.module('graphView', [])
             scope.data = [];
         }
         
+        // var parseDate = d3.time.format("%d-%b-%y").parse;
+
+        // scope.data.forEach(function (d) {
+        //   d.date = parseDate(d.date);
+        //   d.close = +d.close;
+        // });
+
         var margin = {top: 30, bottom: 100, left: 0, right: 0},
         height = 250,
         initWidth = d3.select('.container').node().offsetWidth - margin.left - margin.right;
@@ -64,27 +71,51 @@ angular.module('graphView', [])
           var barWidth = width/data.length;
            
           svg.attr('width', width);
-          
-          svg.selectAll('rect')
-          .data(data).enter()
-          .append('rect')
-          .attr('class', 'rectangle')
-          .attr('width', barWidth)
-          .attr('height', 0)
-          .attr('y', height - margin.top - margin.bottom )
-          .attr('x', function(d,i) {
-            return i * barWidth;
-          })
-          .attr('fill', function(d) { return color(d.value); })
-          .transition()
-          .duration(1000)
-          .attr('y', function(d) {
-            return height - margin.top - margin.bottom - d.value;
-          })
-          .attr('height', function(d) { return d.value; })
-          .text(function (d) {
-            return d.date + "(" + d.value + ")";
-          })
+
+// LINE GRAPH
+          var xScale = d3.time.scale()
+//            .domain([new Date(data[0].date), new Date(data[data.length - 1].date)])
+            .rangeRound([0, width]);
+
+          var yScale = d3.scale.linear()
+              .range([height - margin.top, margin.bottom])
+//              .domain([0, 100]);
+
+          var line = d3.svg.line()
+              .x(function(d, i) { return i*barWidth; })
+              .y(function(d) { return height - margin.top - margin.bottom - d.value; })
+              .interpolate('basis');
+
+          xScale.domain(d3.extent(data, function(d) { return d.date; }));
+          yScale.domain(d3.extent(data, function(d) { return d.value; }));
+
+          svg.append("path")
+              .attr("d", line(data))
+              .attr("stroke", "blue")
+              .attr("stroke-width", 2)
+              .attr("fill", "none");
+
+// BARS          
+          // svg.selectAll('rect')
+          // .data(data).enter()
+          // .append('rect')
+          // .attr('class', 'rectangle')
+          // .attr('width', barWidth)
+          // .attr('height', 0)
+          // .attr('y', height - margin.top - margin.bottom )
+          // .attr('x', function(d,i) {
+          //   return i * barWidth;
+          // })
+          // .attr('fill', function(d) { return color(d.value); })
+          // .transition()
+          // .duration(1000)
+          // .attr('y', function(d) {
+          //   return height - margin.top - margin.bottom - d.value;
+          // })
+          // .attr('height', function(d) { return d.value; })
+          // .text(function (d) {
+          //   return d.date + "(" + d.value + ")";
+          // })
 
   // AXES
 
@@ -95,25 +126,25 @@ angular.module('graphView', [])
           // }), 0])
           // .domain([0, height - 2*margin]),
           
-          // var xScale = d3.time.scale()
-          //   .domain([new Date(data[0].date), new Date(data[data.length - 1].date)])
-          //   .rangeRound([0, width]);
+          var x = d3.time.scale()
+            .domain([new Date(data[0].date), new Date(data[data.length - 1].date)])
+            .rangeRound([0, width]);
 
-          var xScale = d3.scale.ordinal()
-            .rangeRoundBands([0, width - margin.left - margin.right], 0)
+          // var xScale = d3.scale.ordinal()
+          //   .rangeRoundBands([0, width - margin.left - margin.right], 0)
           
           var xAxis = d3.svg.axis()
-              .scale(xScale)
+              .scale(x)
               .orient("bottom")
-              // .ticks(d3.time.hours, 1)
-              //.tickFormat(d3.time.format('%c'));
+              .ticks(d3.time.hours, 6)
+              .tickFormat(d3.time.format('%c'));
 
           // var yAxis = d3.svg.axis()
           //     .scale(yScale)
           //     .orient("left")
           //     .ticks(10, "%");
 
-          xScale.domain(data.map(function(d) { return d.date; }));
+  //        xScale.domain(data.map(function(d) { return d.date; }));
 
   //        yScale.domain([0, d3.max(data, function(d) { return d.value; })]);
 
@@ -123,8 +154,8 @@ angular.module('graphView', [])
               .call(xAxis)
             .selectAll("text")
               // .attr('width', barWidth)
-              .attr("y", -3)
-              .attr("x", 50)
+              .attr("y", 0)
+              .attr("x", 70)
               .attr("dy", ".35em")
               .attr("transform", "rotate(-90)")
               //.style("text-anchor", "start")
