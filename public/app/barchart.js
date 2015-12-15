@@ -30,7 +30,7 @@ angular.module('graphView', [])
         var svg= d3.select(element[0])
           .append("svg")
           .attr('class', 'chart')
-          .style('width', '100%')
+          .style('width', initWidth)
           .style('height', height)
         .append('g')
           .attr('transform', 'translate(0, ' + margin.top + ')');
@@ -61,7 +61,7 @@ angular.module('graphView', [])
           color = d3.scale.category20();
 
           var width = d3.select('.container').node().offsetWidth - margin.left - margin.right;
-          var barWidth = Math.floor((width - 1)/data.length);
+          var barWidth = width/data.length;
            
           svg.attr('width', width);
           
@@ -95,22 +95,25 @@ angular.module('graphView', [])
           // }), 0])
           // .domain([0, height - 2*margin]),
           
-          var xScale = d3.time.scale()
-            .domain([new Date(data[0].date), new Date(data[data.length - 1].date)])
-            .rangeRound([0, width]);
+          // var xScale = d3.time.scale()
+          //   .domain([new Date(data[0].date), new Date(data[data.length - 1].date)])
+          //   .rangeRound([0, width]);
+
+          var xScale = d3.scale.ordinal()
+            .rangeRoundBands([0, width - margin.left - margin.right], 0)
           
           var xAxis = d3.svg.axis()
               .scale(xScale)
               .orient("bottom")
-              .ticks(d3.time.hours, 2)
-              .tickFormat(d3.time.format('%X'));
+              // .ticks(d3.time.hours, 1)
+              //.tickFormat(d3.time.format('%c'));
 
           // var yAxis = d3.svg.axis()
           //     .scale(yScale)
           //     .orient("left")
           //     .ticks(10, "%");
 
-          //xScale.domain(data.map(function(d) { return d.date; }));
+          xScale.domain(data.map(function(d) { return d.date; }));
 
   //        yScale.domain([0, d3.max(data, function(d) { return d.value; })]);
 
@@ -119,11 +122,12 @@ angular.module('graphView', [])
               .attr("transform", "translate(0," + height + ")")
               .call(xAxis)
             .selectAll("text")
-              .attr("y", 0)
+              // .attr('width', barWidth)
+              .attr("y", -3)
               .attr("x", 50)
               .attr("dy", ".35em")
-              .attr("transform", "rotate(-67.5)")
-              .style("text-anchor", "start")
+              .attr("transform", "rotate(-90)")
+              //.style("text-anchor", "start")
 
 
 
@@ -133,4 +137,4 @@ angular.module('graphView', [])
       })
     }
   }
-}]); 
+}]);
