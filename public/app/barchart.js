@@ -1,38 +1,40 @@
 angular.module('graphView', [])
-  .directive('d3Bars', ['d3Service', function(d3Service) {
+  .directive('d3Bars', ['d3Service', '$window', function(d3Service, $window) {
     return {
       restrict: 'EA',
-      scope: {},
+      scope: {
+        graph: '@'
+      },
       link: function(scope, element, attrs) {
         d3Service.d3().then(function(d3) {
 
-        var margin = parseInt(attrs.margin) || 20,
-        barWidth = parseInt(attrs.barWidth) || 20,
-        barPadding = parseInt(attrs.barPadding) || 5;
+        scope.graph;
+        switch (scope.graph) {
+          case 'sun':
+            scope.data = sunData;
+            break;
+          case 'water':
+            scope.data = waterData;
+            break;
+          case 'soil':
+            scope.data = soilData;
+            break;
+          default:
+            scope.data = [];
+        }
+        
+        var margin = {top: 30, bottom: 100, left: 0, right: 0},
+        height = 250,
+        initWidth = d3.select('.container').node().offsetWidth - margin.left - margin.right;
 
         var svg= d3.select(element[0])
-        .append("svg")
-        .style('width', '100%');
+          .append("svg")
+          .attr('class', 'chart')
+          .style('width', '100%')
+          .style('height', height)
+        .append('g')
+          .attr('transform', 'translate(0, ' + margin.top + ')');
 
-        // hard-code data
-        scope.data = [
-          {name: "Greg", score: 100},
-          {name: "Ari", score: 90},
-          {name: 'Q', score: 80},
-          {name: "Loser", score: 70},
-          {name: "Greg", score: 60},
-          {name: "Ari", score: 50},
-          {name: 'Q', score: 40},
-          {name: "Loser", score: 30},
-          {name: "Greg", score: 95},
-          {name: "Ari", score: 85},
-          {name: 'Q', score: 75},
-          {name: "Loser", score: 65},
-          {name: "Greg", score: 55},
-          {name: "Ari", score: 45},
-          {name: 'Q', score: 35},
-          {name: "Loser", score: 25}
-        ];
 
         // Browser onresize event
         window.onresize = function() {
@@ -49,57 +51,84 @@ angular.module('graphView', [])
 
         scope.render = function(data) {
         
-        // remove all previous items before render
-        svg.selectAll('*').remove();
-         
-        // If we don't pass any data, return out of the element
-        if (!data) return;
-         
-        // setup variables
-        var height = d3.select(element[0]).node().offsetHeight - margin,
-        // calculate the height
-        width = scope.data.length * (barWidth + barPadding),
-        // Use the category20() scale function for multicolor support
-        color = d3.scale.category20(),
-        // our xScale
-        yScale = d3.scale.linear()
-        .range([d3.max(data, function(d) {
-          return d.score;
-        }), 0])
-        .domain([0, height]);
-         
-        // set the height based on the calculations above
-        svg.attr('width', width);
-         
-        //create the rectangles for the bar chart
-        svg.selectAll('rect')
-        .data(data).enter()
-        .append('rect')
-        .attr('width', barWidth)
-        .attr('height', 0)
-        .attr('y', height )
-        .attr('x', function(d,i) {
-          return i * (barWidth + barPadding);
-        })
-        .attr('fill', function(d) { return color(d.score); })
-        .transition()
-        .duration(1000)
-        .attr('y', function(d) {
-          return height - d.score;
-        })
-        .attr('height', function(d) { return d.score; })
-        // svg.selectAll('text')
-        // .data(data).enter()
-        // .append('text')
-        // .attr('width', barWidth)
-        // .attr('height', 140)
-        // .attr('y', Math.round(margin/2))
-        // .attr('x', function(d,i) {
-        //   return i * (barWidth + barPadding) + 13;
-        // })
-        .text(function (d) {
-          return d.name + "(" + d.score + ")";
-        })
+          // remove all previous items before render
+          svg.selectAll('*').remove();
+           
+          // If we don't pass any data, return out of the element
+          if (!data) return;
+          
+          // Use the category20() scale function for multicolor support
+          color = d3.scale.category20();
+
+          var width = d3.select('.container').node().offsetWidth - margin.left - margin.right;
+          var barWidth = Math.floor((width - 1)/data.length);
+           
+          svg.attr('width', width);
+          
+          svg.selectAll('rect')
+          .data(data).enter()
+          .append('rect')
+          .attr('class', 'rectangle')
+          .attr('width', barWidth)
+          .attr('height', 0)
+          .attr('y', height - margin.top - margin.bottom )
+          .attr('x', function(d,i) {
+            return i * barWidth;
+          })
+          .attr('fill', function(d) { return color(d.value); })
+          .transition()
+          .duration(1000)
+          .attr('y', function(d) {
+            return height - margin.top - margin.bottom - d.value;
+          })
+          .attr('height', function(d) { return d.value; })
+          .text(function (d) {
+            return d.date + "(" + d.value + ")";
+          })
+
+  // AXES
+
+          // our xScale
+          // var yScale = d3.scale.linear()
+          // .range([d3.max(data, function(d) {
+          //   return d.value;
+          // }), 0])
+          // .domain([0, height - 2*margin]),
+          
+          var xScale = d3.time.scale()
+            .domain([new Date(data[0].date), new Date(data[data.length - 1].date)])
+            .rangeRound([0, width]);
+          
+          var xAxis = d3.svg.axis()
+              .scale(xScale)
+              .orient("bottom")
+              .ticks(d3.time.hours, 2)
+              .tickFormat(d3.time.format('%X'));
+
+          // var yAxis = d3.svg.axis()
+          //     .scale(yScale)
+          //     .orient("left")
+          //     .ticks(10, "%");
+
+          //xScale.domain(data.map(function(d) { return d.date; }));
+
+  //        yScale.domain([0, d3.max(data, function(d) { return d.value; })]);
+
+          svg.append("g")
+              .attr("class", "x axis")
+              .attr("transform", "translate(0," + height + ")")
+              .call(xAxis)
+            .selectAll("text")
+              .attr("y", 0)
+              .attr("x", 50)
+              .attr("dy", ".35em")
+              .attr("transform", "rotate(-67.5)")
+              .style("text-anchor", "start")
+
+
+
+
+          
         }
       })
     }
