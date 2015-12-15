@@ -1,0 +1,82 @@
+.splash {
+  /*background-color: #f9c000;*/
+
+  /*display: block;*/
+  z-index: -1;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-image: url("../images/edyn-web-hero-top.jpg");
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%;
+
+  filter: blur(10px);
+  -webkit-filter: blur(10px);
+  /*z-index: -1;*/
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 10;
+
+  transition: 1s linear;
+  -webkit-transition: 1s -webkit-filter linear;
+  -o-transition: 1s -o-filter linear;
+
+}
+
+.splash.min {
+  filter: blur(0px);
+  -webkit-filter: blur(0px);
+}
+
+.scrollable {
+  /*border: 2px solid red;*/
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  /*z-index: 20;*/
+}
+
+.first {
+  color: white;
+  transition: color 1s;
+  -webkit-transition: color 1s, 
+
+  -webkit-transition-delay: 1s; /* Safari */
+    transition-delay: 1s;
+}
+
+.first.min {
+  color: black;
+  transition: color 1.5s;
+  -webkit-transition: color 1.5s, 
+
+  -webkit-transition-delay: 1s; /* Safari */
+  transition-delay: 1s;
+}
+
+.yellow {
+  padding: 20px;
+  margin-top: -20px;
+  background-color: #f9c000;
+  /*border: 1px solid #f9c000; 
+  /*why does this remove the border??*/
+  min-height: 100%;
+}
+
+#test {
+  color: black;
+  transition: color 1s;
+  -webkit-transition: color 1s, 
+
+  -webkit-transition-delay: 1s; /* Safari */
+    transition-delay: 1s;
+}
+
+#test.min {
+   color: white; 
+}
