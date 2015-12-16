@@ -15,19 +15,17 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
-
 // This restricts anything in this path, except POST
-
-app.use('/api/users', expressJWT( //request must go through the secret: secret and pass otherwise breaks
-    {
-      secret: secret
-    }
-  ).unless( // only allows us to POST or CREATE A USER without expressJWT
-    {
-      method: "POST",
-    }
-  )
-);
+// app.use('/api/users', expressJWT( //request must go through the secret: secret and pass otherwise breaks
+//     {
+//       secret: secret
+//     }
+//   ).unless( // only allows us to POST or CREATE A USER without expressJWT
+//     {
+//       method: "POST",
+//     }
+//   )
+// );
 
 app.use('/api/gardens', expressJWT({secret: secret}));
 
@@ -42,6 +40,7 @@ app.use(function (err, req, res, next) {
 });
 
 app.use('/api/users', require('./controllers/user.js'));
+
 
 app.post('/api/auth', function(req, res) {
   

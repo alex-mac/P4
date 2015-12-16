@@ -1,0 +1,19 @@
+/*login modal*/
+.login {
+  padding: 20px;
+  min-height: 380px;
+  background-color: #FFFFFD;
+  font-family: 'Open Sans', sans-serif;
+
+}
+
+.login button {
+  float: right;
+}
+
+.modal-content{
+  -webkit-box-shadow: 1 5px 15px rgba(0,0,0,.25);
+  -moz-box-shadow: 1 5px 15px rgba(0,0,0,.25);
+  -o-box-shadow: 1 5px 15px rgba(0,0,0,.25);
+  box-shadow: 1 5px 15px rgba(0,0,0,.25);
+}

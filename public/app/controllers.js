@@ -62,7 +62,8 @@ angular.module('GardenCtrls', ['GardenServices', 'ngAnimate', 'ui.bootstrap'])
   '$http',
   '$location',
   "Auth",
-  function ($scope, $http, $location, Auth) {
+  '$uibModalInstance',
+  function ($scope, $http, $location, Auth, $uibModalInstance) {
     $scope.login = true;
     $scope.user = {
       email: "",
@@ -72,13 +73,28 @@ angular.module('GardenCtrls', ['GardenServices', 'ngAnimate', 'ui.bootstrap'])
     $scope.actionName = 'Login';
     $scope.userAction = function () {
       $http.post("/api/auth", $scope.user).then(function success(res) {
-        Auth.saveToken(res.data.token);
+        Auth.saveToken(res.data.token, res.data.user);
         console.log(res.data.user.id)
         $location.path('/gardens');
+        $uibModalInstance.dismiss('close');//closes modal
       }, function error(res) {
         console.log(res.data);
       });
     }
+
+    $scope.redirect = function() {
+      $location.path('/signup');
+      $uibModalInstance.dismiss('close');//closes modal
+    }
+
+
+  // $scope.close = function() {
+  //   $uibModalInstance.dismiss('close');
+  // };
+
+  // // $scope.login = function() {
+  // //   $uibModalInstance.close($scope.message);
+  // // }
   }])
   .controller('SignupCtrl', [
     '$scope',
@@ -112,23 +128,10 @@ angular.module('GardenCtrls', ['GardenServices', 'ngAnimate', 'ui.bootstrap'])
   $scope.navCollapsed = true;
 
   $scope.open = function() {
-    console.log('modal!');
     var modal = $uibModal.open({
       animation: true,
       templateUrl: '/app/views/login.html',
       controller: 'LoginCtrl'
     });    
   };
-}])
-.controller('ModalInstanceCtrl', ['$scope', '$uibModalInstance', function($scope, $uibModalInstance) {
-  
-  $scope.message = "I'm working";
-
-  $scope.close = function() {
-    $uibModalInstance.dismiss('close');
-  };
-
-  // $scope.login = function() {
-  //   $uibModalInstance.close($scope.message);
-  // }
 }]);

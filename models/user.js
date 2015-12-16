@@ -1,12 +1,15 @@
 var mongoose = require('mongoose');
 var bcrypt   = require('bcryptjs');
 
-var UserSchema = mongoose.Schema({
-  name: String,
-  email: String,
-  password: String
+var UserSchema = new mongoose.Schema({
+  username: { type: String, required: true, unique: true },
+  email: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+  resetPasswordToken: String,
+  resetPasswordExpires: Date
 });
 
+// restricts the information received in a user request to exclude the password
 UserSchema.set('toJSON', {
     transform: function(doc, ret, options) {
         var returnJson = {
