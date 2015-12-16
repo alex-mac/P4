@@ -1,2 +1,21 @@
-<h1 ng-hide="isLoggedIn()">You must be logged in to see this page!</h1>
-<h1 ng-show="isLoggedIn()">Your Gardens</h1>
+<li uib-dropdown class="dropdown" ng-controller="NavCtrl">
+   <a href="#" uib-dropdown-toggle class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+   <ul class="dropdown-menu">
+       <li><a href="#">Action</a></li>
+       <li><a ng-click-"addGarden()">New Garden</a></li>
+       <li><a href="#">Settings</a></li>
+       <li><a ng-click="logout()">Logout</a></li>
+   </ul>
+</li>
+
+<div class="well">
+  <p>First Garden</p>
+</div>  
+
+<div class="well">
+  <p>Second Garden</p>
+</div>
+<!-- <div class="container">
+  <div d3-bars graph="sun"></div>
+  <div d3-bars graph="soil"></div>
+</div> -->

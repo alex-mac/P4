@@ -1,4 +1,4 @@
-var app = angular.module('GardenApp', ['ngRoute', 'GardenCtrls', 'GardenServices', 'd3', 'graphView']);
+var app = angular.module('GardenApp', ['ngRoute', 'GardenCtrls', 'GardenServices', 'd3', 'graphView', 'onScroll']);
 
 app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 

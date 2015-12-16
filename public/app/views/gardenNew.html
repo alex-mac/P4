@@ -1,1 +1,18 @@
 <h1>New Garden</h1>
+
+<form ng-submit="createGarden()">
+  <div class="form-group">
+    <label for="title">Add a new Garden</label>
+    <input type="text" class="form-control" id="title" ng-model="recipe.title">
+  </div>
+  <div class="form-group">
+    <label for="description">Name</label>
+    <textarea class="form-control" id="description" ng-model="recipe.description"></textarea>
+  </div>
+  <div class="form-group">
+    <label for="image">Another field</label>
+    <input type="url" class="form-control" id="image" placeholder="" ng-model="recipe.image">
+  </div>
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>

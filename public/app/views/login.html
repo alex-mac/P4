@@ -1,16 +1,18 @@
-<form ng-submit="userAction()">
-  <legend>{{ actionName }}</legend>
-  <div class="form-group" ng-hide="login">
-    <label for="name">Name</label>
-    <input type="name" class="form-control"  id="name" placeholder="Name" ng-model="user.name">
-  </div>
-  <div class="form-group">
-    <label for="email">Email</label>
-    <input type="email" class="form-control"  id="email" placeholder="Email" ng-model="user.email">
-  </div>
-  <div class="form-group">
-    <label for="password">Password</label>
-    <input type="password" class="form-control" id="password" placeholder="Password" ng-model ="user.password">
-  </div>
-  <button type="submit" class="btn btn-primary">Log In</button>
-</form>
+<div class="login">
+  <form ng-submit="userAction()">
+    <legend>{{ actionName }}</legend>
+    <div class="form-group" ng-hide="login">
+      <label for="name">Name</label>
+      <input type="name" class="form-control"  id="name" placeholder="Name" ng-model="user.name">
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" class="form-control"  id="email" placeholder="Email" ng-model="user.email">
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" class="form-control" id="password" placeholder="Password" ng-model ="user.password">
+    </div>
+    <button type="submit" class="btn btn-primary">Log In</button>
+  </form>
+</div>

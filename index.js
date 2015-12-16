@@ -7,16 +7,13 @@ var User = require('./models/user');
 var app = express();
 var path = require('path');
 
-// This is the secret used to sign our token
 var secret = "thesecretgarden";
-// This connects to MongoDB
-mongoose.connect('mongodb://localhost:27017/gardens');
 
-// app.use(bodyParser.urlencoded({extended:true}));
+mongoose.connect('mongodb://localhost:27017/gardens');
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false})); //what is this line of code
+app.use(bodyParser.urlencoded({extended: false}));
 
 
 // This restricts anything in this path, except POST
