@@ -1,4 +1,4 @@
-<div class="login">
+<div class="login" ng-controller="BootstrapCtrl">
   <form ng-submit="userAction()">
     <legend>{{ actionName }}</legend>
     <div class="form-group" ng-hide="login">
@@ -13,6 +13,12 @@
       <label for="password">Password</label>
       <input type="password" class="form-control" id="password" placeholder="Password" ng-model ="user.password">
     </div>
-    <button type="submit" class="btn btn-primary">Log In</button>
+      <a href="/forget-me-not">
+        Forgot your password?
+      </a>
+      <hr>
+      <br />
+      <br />
+    <button type="submit" class="btn btn-primary" ng-click="close()">Log In</button>
   </form>
 </div>

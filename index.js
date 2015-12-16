@@ -6,6 +6,8 @@ var jwt = require('jsonwebtoken');
 var User = require('./models/user');
 var app = express();
 var path = require('path');
+var nodemailer = require('nodemailer');
+var async = require('async');
 
 var secret = "thesecretgarden";
 

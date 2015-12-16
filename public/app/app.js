@@ -17,9 +17,12 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
     templateUrl: 'app/views/gardenShow.html',
     controller: 'ShowCtrl'
   })
-  .when('/login', {
+  .when('/login', { //get rid of this later.  this is just to see what it looks like
     templateUrl: '/app/views/login.html',
     controller: 'LoginCtrl'
+  })
+  .when('/forget-me-not', {
+    templateUrl: '/app/views/forgot.html',
   })
   .when('/signup', {
     templateUrl: '/app/views/signup.html',

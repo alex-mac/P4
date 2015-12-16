@@ -47,7 +47,6 @@
   shape-rendering: crispEdges;
 }
 
-
 /*signup navbar*/
 .navbar {
   font-family: 'Open Sans', sans-serif;
@@ -95,6 +94,7 @@
   color: white;
   padding: 10px
 }
+
 
 /*general css*/
 .btn {
