@@ -2,15 +2,19 @@ angular.module('GardenCtrls', ['GardenServices', 'ngAnimate', 'ui.bootstrap'])
 .controller('HomeCtrl', ['$scope', function ($scope, Garden) {
 
 }])
-.controller('GardenCtrl', ['$scope', 'GardenFactory', function($scope, GardenFactory) {
+.controller('GardenCtrl', ['$scope', 'Auth', 'GardenFactory', function($scope, Auth, GardenFactory) {
   $scope.gardens = [];
+  user_id = window.localStorage["user.id"]
+  if (user_id) {
+    GardenFactory.query(function success(data) {
+      $scope.gardens = data.data;
 
-  GardenFactory.query(function success(data) {
-    $scope.gardens = data;
-  }, function error(data) {
-    console.log(data)
-  });
+    }, function error(data) {
+      console.log(data)
+    });
+  }
 
+  // to delete a garden that a user has
   $scope.deleteGarden = function(id, gardenIdx) {
     GardenFactory.delete({id: id}, function success(data) {
       $scope.gardens.splice(gardenIdx, 1);
@@ -42,12 +46,15 @@ angular.module('GardenCtrls', ['GardenServices', 'ngAnimate', 'ui.bootstrap'])
   }
 }])
 .controller('NavCtrl', ['$scope', '$location', 'Auth', function($scope, $location, Auth) {
+  $scope.addGarden = function() {
+    location.path('/gardens/new');
+  }
+
   $scope.logout = function () {
     Auth.removeToken();
     location.reload();
     // $scope.recipes = null;
     // $location.path('/');
-
   };
 }])
 .controller("LoginCtrl", [
@@ -56,7 +63,6 @@ angular.module('GardenCtrls', ['GardenServices', 'ngAnimate', 'ui.bootstrap'])
   '$location',
   "Auth",
   function ($scope, $http, $location, Auth) {
-    console.log("I reached the LoginCtrl");
     $scope.login = true;
     $scope.user = {
       email: "",
@@ -67,7 +73,8 @@ angular.module('GardenCtrls', ['GardenServices', 'ngAnimate', 'ui.bootstrap'])
     $scope.userAction = function () {
       $http.post("/api/auth", $scope.user).then(function success(res) {
         Auth.saveToken(res.data.token);
-        $location.path('/signup');
+        console.log(res.data.user.id)
+        $location.path('/gardens');
       }, function error(res) {
         console.log(res.data);
       });
@@ -87,13 +94,11 @@ angular.module('GardenCtrls', ['GardenServices', 'ngAnimate', 'ui.bootstrap'])
         password: ""
       }
 
-      $scope.actionName = 'Signup'
-
       $scope.userAction = function () {
         $http.post("/api/users", $scope.user).then(function success(res) {
           $http.post('api/auth', $scope.user).then(function success(res) {
-            Auth.saveToken(res.data.token);
-            $location.path('/');
+            Auth.saveToken(res.data.token, res.data.user);
+            $location.path('/gardens');
           }, function error(res) {
             console.log(res.data);
           })
@@ -111,21 +116,17 @@ angular.module('GardenCtrls', ['GardenServices', 'ngAnimate', 'ui.bootstrap'])
     var modal = $uibModal.open({
       animation: true,
       templateUrl: '/app/views/login.html',
-      controller: 'LoginCtrl',
-      // controller: 'ModalInstanceCtrl'
-    });
-
-
-    
+      controller: 'LoginCtrl'
+    });    
   };
 }])
 .controller('ModalInstanceCtrl', ['$scope', '$uibModalInstance', function($scope, $uibModalInstance) {
   
   $scope.message = "I'm working";
 
-  // $scope.close = function() {
-  //   $uibModalInstance.dismiss('close');
-  // };
+  $scope.close = function() {
+    $uibModalInstance.dismiss('close');
+  };
 
   // $scope.login = function() {
   //   $uibModalInstance.close($scope.message);

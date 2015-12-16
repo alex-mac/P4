@@ -6,14 +6,16 @@ angular.module('GardenServices', ['ngResource'])
 }])
 .factory('Auth', ["$window", function($window){
     return {
-        saveToken: function(token){
+        saveToken: function(token, user){
             $window.localStorage[TOKEN_STORAGE] = token;
+            $window.localStorage["user.id"] = user.id;
         },
         getToken: function () {
         	return $window.localStorage[TOKEN_STORAGE];
         },
         removeToken: function () {
         	$window.localStorage.removeItem(TOKEN_STORAGE);
+          $window.localStorage.removeItem("user.id");
         },
         isLoggedIn: function () {
         	var token = this.getToken();
