@@ -1,7 +1,6 @@
 var app = angular.module('GardenApp', ['ngRoute', 'GardenCtrls', 'GardenServices', 'd3', 'graphView', 'onScroll']);
 
 app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
-
   $routeProvider
   .when('/', {
     templateUrl: 'app/views/index.html',

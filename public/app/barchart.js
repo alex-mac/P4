@@ -8,76 +8,65 @@ angular.module('graphView', [])
       link: function(scope, element, attrs) {
         d3Service.d3().then(function(d3) {
 
-        // [dataSet, label, line class, fill class]
+          var params = {
+            "sun": [sunData, "Sunlight", "#ff9100", "sun"],
+            "water": [waterData, "Soil Moisture", "#00b0ff", "water"],
+            "soil": [soilData, "Soil Nutrition", "#76ff03", "soil"]
+          }
 
-        var params = {
+          var t;
+          scope.graph;
+          t = scope.graph;
+          scope.data = params[t][0];
+  
+          var height = 250,
+          margin = {top: .2*height, bottom: .2*height, left: 30, right: 30},
+          innerHeight = height - margin.top - margin.bottom,
+          initWidth = d3.select('.container').node().offsetWidth - margin.left - margin.right;
 
-          "sun": [sunData, "Sunlight", "#ff9100", "sun"],
-          "water": [waterData, "Soil Moisture", "#00b0ff", "water"],
-          "soil": [soilData, "Soil Nutrition", "#76ff03", "soil"]
-        }
-
-        var t;
-        scope.graph;
-        t = scope.graph;
-
-        scope.data = params[t][0];
-        
-        // var parseDate = d3.time.format("%d-%b-%y").parse;
-
-        // scope.data.forEach(function (d) {
-        //   d.date = parseDate(d.date);
-        //   d.close = +d.close;
-        // });
-
-        var height = 250,
-        margin = {top: .2*height, bottom: .2*height, left: 30, right: 30},
-        innerHeight = height - margin.top - margin.bottom,
-        initWidth = d3.select('.container').node().offsetWidth - margin.left - margin.right;
-
-        var svg= d3.select(element[0])
-          .append("svg")
+          var svg= d3.select(element[0])
+            .append("svg")
 //          .attr('class', 'chart')
-          .style('width', initWidth)
-          .style('height', height)
-        .append('g')
-          .attr('transform', 'translate(' + margin.left + ', ' + margin.top + ')');
+            .style('width', initWidth)
+            .style('height', height)
+            .append('g')
+            .attr('transform', 'translate(' + margin.left + ', ' + margin.top + ')');
 
 
-        // Browser onresize event
-        window.onresize = function() {
-          scope.$apply();
-        };
+          // Browser onresize event
+          window.onresize = function() {
+            scope.$apply();
+          };
 
 
-        // Watch for resize event
-        scope.$watch(function() {
-          return angular.element(window)[0].innerWidth;
-        }, function() {
-          scope.render(scope.data);
-        });
+          // Watch for resize event
+          scope.$watch(function() {
+            return angular.element(window)[0].innerWidth;
+          }, function() {
+            scope.render(scope.data);
+          });
 
-        scope.render = function(data) {
+          scope.render = function(data) {
         
           // remove all previous items before render
           svg.selectAll('*').remove();
           
-         // If we don't pass any data, return out of the element
-         if (!data) return;
+          // If we don't pass any data, return out of the element
+          if (!data) return;
          
-         // Use the category20() scale function for multicolor support
-         color = d3.scale.category20();
+          // Use the category20() scale function for multicolor support
+          color = d3.scale.category20();
 
-         var width = d3.select('.container').node().offsetWidth - margin.left - margin.right;
-         var barWidth = width/data.length;
+          var width = d3.select('.container').node().offsetWidth - margin.left - margin.right;
+          var barWidth = width/data.length;
           
-         svg.attr('width', width);
+          svg.attr('width', width);
 
 
-        // GRID LINES HORIZONTAL
-        svg.selectAll("line.horizontalGrid").data([1,2,3,4,5]).enter()
-          .append("line")
-          .attr({
+// GRID LINES HORIZONTAL
+          svg.selectAll("line.horizontalGrid").data([1,2,3,4,5]).enter()
+            .append("line")
+            .attr({
               "class":"horizontalGrid",
               "x1" : 10,
               "x2" : width,
@@ -87,56 +76,42 @@ angular.module('graphView', [])
               "shape-rendering" : "crispEdges",
               "stroke" : "rgb(224, 224, 224)",
               "stroke-width" : "1px"
-          });
-
-        svg.selectAll("line.horizontalGrid").data([1,2,3,4,5]).enter()
-          .append("line")
-          .attr({
-              "class":"horizontalGrid",
-              "x1" : 10,
-              "x2" : width,
-              "y1" : function(d){ return d*30 - 30;},
-              "y2" : function(d){ return d*30 - 30;},
-              "fill" : "none",
-              "shape-rendering" : "crispEdges",
-              "stroke" : "rgb(224, 224, 224)",
-              "stroke-width" : "1px"
-          });
-
+            });
 
 // LINE GRAPH
           //dateRange = [new Date(data[0].date), new Date(data[data.length - 1].date)];
-          
           var x = d3.time.scale()
             .domain(d3.extent(data, function(d) { return new Date(d.date); }))
             .rangeRound([0, width]);
 
           var y = d3.scale.linear()
-              .domain(d3.extent(data, function(d) { return d.value; }))
-              .range([innerHeight, 0]);
+            .domain(d3.extent(data, function(d) { return d.value; }))
+            .range([innerHeight, 0]);
 
           var line = d3.svg.line()
-              .x(function (d, i) { return x(new Date(d.date)); })
-              .y(function (d) { return y(d.value); })
-              .interpolate('cardinal');
+            .x(function (d, i) { return x(new Date(d.date)); })
+            .y(function (d) { return y(d.value); })
+            .interpolate('cardinal');
 
           var area = d3.svg.area()
-              .x(function (d, i) { return x(new Date(d.date)); })
-              .y(function (d) { return y(d.value); })
-              .y0(innerHeight)
-              .interpolate('cardinal');
+            .x(function (d, i) { return x(new Date(d.date)); })
+            .y(function (d) { return y(d.value); })
+            .y0(innerHeight)
+            .interpolate('cardinal');
 
 
           svg.append("path")
-              .datum(data)
-              .attr("class", params[t][3])
-              .attr("d", area);
+            .datum(data)
+            .attr({
+              "class" : params[t][3],
+              "d" : area 
+            });
 
           svg.append("path")
-              .attr("d", line(data))
-              .attr("stroke", params[t][2])
-              .attr("stroke-width", 2)
-              .attr("fill", "none");
+            .attr("d", line(data))
+            .attr("stroke", params[t][2])
+            .attr("stroke-width", 2)
+            .attr("fill", "none");
 
 
 // BARS          
@@ -161,49 +136,44 @@ angular.module('graphView', [])
           //   return d.date + "(" + d.value + ")";
           // })
 
-
-
-  // AXES
-          
+// AXES
           var xAxis = d3.svg.axis()
-              .scale(x)
-              .orient("bottom")
-              .ticks(d3.time.hours, 4)
-              .tickFormat(d3.time.format.multi([
-                ['%m/%d %I %p', function(d) { return (d.getHours() == 0); }],
-                ['%I:%M %p', function(d) { return true; }]
-                ]));
+            .scale(x)
+            .orient("bottom")
+            .ticks(d3.time.hours, 4)
+            .tickFormat(d3.time.format.multi([
+              ['%m/%d %I %p', function(d) { return (d.getHours() == 0); }],
+              ['%I:%M %p', function(d) { return true; }]
+              ]));
 
 
           var yAxis = d3.svg.axis()
-              .scale(y)
-              .orient("left")
-              .ticks(5);
+            .scale(y)
+            .orient("left")
+            .ticks(5);
 
           svg.append("g")
-              .attr("class", "x axis")
-              .attr("transform", "translate(0, " + innerHeight + ")")
-              .call(xAxis)
+            .attr("class", "x axis")
+            .attr("transform", "translate(0, " + innerHeight + ")")
+            .call(xAxis)
             .selectAll("text")
-              .attr("y", 0)
-              .attr("x", -65)
-              //.attr("dy", ".35em")
-              .attr("transform", "rotate(-90)")
-              .style("text-anchor", "start")
+            .attr("y", 0)
+            .attr("x", -65)
+            //.attr("dy", ".35em")
+            .attr("transform", "rotate(-90)")
+            .style("text-anchor", "start");
 
           svg.append("g")
-              .attr("class", "y axis")
-              .attr("transform", "translate(0, " + 0 + ")")
-              .call(yAxis)
+            .attr("class", "y axis")
+            .attr("transform", "translate(0, " + 0 + ")")
+            .call(yAxis)
             .selectAll("text")
-              .attr("y", 0)
-              .attr("x", -25)
-              //.attr("dy", ".35em")
-              .style("text-anchor", "start")
-          
+            .attr("y", 0)
+            .attr("x", -25)
+            //.attr("dy", ".35em")
+            .style("text-anchor", "start");
         }
       })
     }
   }
-
 }]);
