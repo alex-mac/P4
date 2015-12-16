@@ -12,7 +12,6 @@
       stroke-width: 0;
 }
 
-
 .sun {
   fill: #ffd180;
   stroke-width: 0;
@@ -32,7 +31,6 @@
 }
 
 .container {
-  border: 1px solid black;
   padding: 0;
 }
 .axis text {

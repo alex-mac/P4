@@ -1,0 +1,46 @@
+.font-1 {
+	font-family: Georgia, serif;
+}
+
+.font-2 {
+	font-family: Tahoma, sans-serif;
+	letter-spacing: .2em;
+	font-weight: 100;
+}
+
+.light-brown {
+	color: #7D5929;
+}
+
+.chalk {
+	color: #FFFFEE;
+}
+
+h1.large {
+	font-size: 72px;
+}
+
+.btn-success {
+	background-color: #00AB00;
+	border: none;
+}
+
+.btn-primary {
+	background-color: #007FFF;
+	border: none;
+}
+
+.btn-pad {
+	margin: 2em;
+	font-size: 1.25em;
+}
+
+.login-btn {
+	margin-top: 1em;
+	font-size: 1em;
+}
+
+.tumbleweed {
+	height: 300px;
+	margin: 0 auto;
+}
