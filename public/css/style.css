@@ -1,16 +1,43 @@
+/*.area {
+  fill: #ffd27f;
+  stroke-width: 0;
+}*/
+
+.sun {
+  fill: #ffd180;
+  stroke-width: 0;
+
+}
+
+.water {
+  fill: #80d8ff;
+  stroke-width: 0;
+
+}
+
+.soil {
+  fill: #ccff90;
+  stroke-width: 0;
+
+}
+
+.container {
+  border: 1px solid black;
+  padding: 0;
+}
 .axis text {
   font: 10px sans-serif;
+  fill: grey;
 }
 
 .axis line,
 .axis path {
   fill: none;
-  stroke: #000;
+  stroke: grey;
   shape-rendering: crispEdges;
 }
 
 .x.axis path {
-  display: none;
 }
 
 /*signup navbar*/

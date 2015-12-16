@@ -8,20 +8,21 @@ angular.module('graphView', [])
       link: function(scope, element, attrs) {
         d3Service.d3().then(function(d3) {
 
-        scope.graph;
-        switch (scope.graph) {
-          case 'sun':
-            scope.data = sunData;
-            break;
-          case 'water':
-            scope.data = waterData;
-            break;
-          case 'soil':
-            scope.data = soilData;
-            break;
-          default:
-            scope.data = [];
+        // [dataSet, label, line class, fill class]
+
+        var params = {
+
+          "sun": [sunData, "Sunlight", "#ff9100", "sun"],
+          "water": [waterData, "Soil Moisture", "#00b0ff", "water"],
+          "soil": [soilData, "Soil Nutrition", "#76ff03", "soil"]
         }
+
+
+        var t;
+        scope.graph;
+        t = scope.graph;
+
+        scope.data = params[t][0];
         
         // var parseDate = d3.time.format("%d-%b-%y").parse;
 
@@ -30,17 +31,18 @@ angular.module('graphView', [])
         //   d.close = +d.close;
         // });
 
-        var margin = {top: 30, bottom: 100, left: 0, right: 0},
-        height = 250,
+        var height = 250,
+        margin = {top: .2*height, bottom: .2*height, left: 30, right: 30},
+        innerHeight = height - margin.top - margin.bottom,
         initWidth = d3.select('.container').node().offsetWidth - margin.left - margin.right;
 
         var svg= d3.select(element[0])
           .append("svg")
-          .attr('class', 'chart')
+//          .attr('class', 'chart')
           .style('width', initWidth)
           .style('height', height)
         .append('g')
-          .attr('transform', 'translate(0, ' + margin.top + ')');
+          .attr('transform', 'translate(' + margin.left + ', ' + margin.top + ')');
 
 
         // Browser onresize event
@@ -73,25 +75,36 @@ angular.module('graphView', [])
           svg.attr('width', width);
 
 // LINE GRAPH
-          var xScale = d3.time.scale()
-//            .domain([new Date(data[0].date), new Date(data[data.length - 1].date)])
+          //dateRange = [new Date(data[0].date), new Date(data[data.length - 1].date)];
+          
+          var x = d3.time.scale()
+            .domain(d3.extent(data, function(d) { return new Date(d.date); }))
             .rangeRound([0, width]);
 
-          var yScale = d3.scale.linear()
-              .range([height - margin.top, margin.bottom])
-//              .domain([0, 100]);
+          var y = d3.scale.linear()
+              .domain(d3.extent(data, function(d) { return d.value; }))
+              .range([innerHeight, 0]);
 
           var line = d3.svg.line()
-              .x(function(d, i) { return i*barWidth; })
-              .y(function(d) { return height - margin.top - margin.bottom - d.value; })
-              .interpolate('basis');
+              .x(function (d, i) { return x(new Date(d.date)); })
+              .y(function (d) { return y(d.value); })
+              .interpolate('cardinal');
 
-          xScale.domain(d3.extent(data, function(d) { return d.date; }));
-          yScale.domain(d3.extent(data, function(d) { return d.value; }));
+          var area = d3.svg.area()
+              .x(function (d, i) { return x(new Date(d.date)); })
+              .y(function (d) { return y(d.value); })
+              .y0(innerHeight)
+              .interpolate('cardinal');
+
+
+          svg.append("path")
+              .datum(data)
+              .attr("class", params[t][3])
+              .attr("d", area);
 
           svg.append("path")
               .attr("d", line(data))
-              .attr("stroke", "blue")
+              .attr("stroke", params[t][2])
               .attr("stroke-width", 2)
               .attr("fill", "none");
 
@@ -118,47 +131,42 @@ angular.module('graphView', [])
           // })
 
   // AXES
-
-          // our xScale
-          // var yScale = d3.scale.linear()
-          // .range([d3.max(data, function(d) {
-          //   return d.value;
-          // }), 0])
-          // .domain([0, height - 2*margin]),
-          
-          var x = d3.time.scale()
-            .domain([new Date(data[0].date), new Date(data[data.length - 1].date)])
-            .rangeRound([0, width]);
-
-          // var xScale = d3.scale.ordinal()
-          //   .rangeRoundBands([0, width - margin.left - margin.right], 0)
           
           var xAxis = d3.svg.axis()
               .scale(x)
               .orient("bottom")
-              .ticks(d3.time.hours, 6)
-              .tickFormat(d3.time.format('%c'));
+              .ticks(d3.time.hours, 4)
+              .tickFormat(d3.time.format.multi([
+                ['%m/%d %I %p', function(d) { return (d.getHours() == 0); }],
+                ['%I:%M %p', function(d) { return true; }]
+                ]));
 
-          // var yAxis = d3.svg.axis()
-          //     .scale(yScale)
-          //     .orient("left")
-          //     .ticks(10, "%");
 
-  //        xScale.domain(data.map(function(d) { return d.date; }));
-
-  //        yScale.domain([0, d3.max(data, function(d) { return d.value; })]);
+          var yAxis = d3.svg.axis()
+              .scale(y)
+              .orient("left")
+              .ticks(5);
 
           svg.append("g")
               .attr("class", "x axis")
-              .attr("transform", "translate(0," + height + ")")
+              .attr("transform", "translate(0, " + innerHeight + ")")
               .call(xAxis)
             .selectAll("text")
-              // .attr('width', barWidth)
               .attr("y", 0)
-              .attr("x", 70)
-              .attr("dy", ".35em")
+              .attr("x", -65)
+              //.attr("dy", ".35em")
               .attr("transform", "rotate(-90)")
-              //.style("text-anchor", "start")
+              .style("text-anchor", "start")
+
+          svg.append("g")
+              .attr("class", "y axis")
+              .attr("transform", "translate(0, " + 0 + ")")
+              .call(yAxis)
+            .selectAll("text")
+              .attr("y", 0)
+              .attr("x", -25)
+              //.attr("dy", ".35em")
+              .style("text-anchor", "start")
 
 
 
