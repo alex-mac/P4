@@ -62,17 +62,17 @@ angular.module('graphView', [])
         
           // remove all previous items before render
           svg.selectAll('*').remove();
-           
-          // If we don't pass any data, return out of the element
-          if (!data) return;
           
-          // Use the category20() scale function for multicolor support
-          color = d3.scale.category20();
+         // If we don't pass any data, return out of the element
+         if (!data) return;
+         
+         // Use the category20() scale function for multicolor support
+         color = d3.scale.category20();
 
-          var width = d3.select('.container').node().offsetWidth - margin.left - margin.right;
-          var barWidth = width/data.length;
-           
-          svg.attr('width', width);
+         var width = d3.select('.container').node().offsetWidth - margin.left - margin.right;
+         var barWidth = width/data.length;
+          
+         svg.attr('width', width);
 
 // LINE GRAPH
           //dateRange = [new Date(data[0].date), new Date(data[data.length - 1].date)];
@@ -167,13 +167,10 @@ angular.module('graphView', [])
               .attr("x", -25)
               //.attr("dy", ".35em")
               .style("text-anchor", "start")
-
-
-
-
           
         }
       })
     }
   }
+
 }]);
