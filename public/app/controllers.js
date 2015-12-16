@@ -82,6 +82,11 @@ angular.module('GardenCtrls', ['GardenServices', 'ngAnimate', 'ui.bootstrap'])
       });
     }
 
+    $scope.redirect = function() {
+      $location.path('/signup');
+      $uibModalInstance.dismiss('close');//closes modal
+    }
+
 
   // $scope.close = function() {
   //   $uibModalInstance.dismiss('close');

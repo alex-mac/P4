@@ -6,8 +6,6 @@ var jwt = require('jsonwebtoken');
 var User = require('./models/user');
 var app = express();
 var path = require('path');
-var nodemailer = require('nodemailer');
-var async = require('async');
 
 var secret = "thesecretgarden";
 
@@ -16,8 +14,6 @@ mongoose.connect('mongodb://localhost:27017/gardens');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
-
-
 
 // This restricts anything in this path, except POST
 // app.use('/api/users', expressJWT( //request must go through the secret: secret and pass otherwise breaks
@@ -44,6 +40,7 @@ app.use(function (err, req, res, next) {
 });
 
 app.use('/api/users', require('./controllers/user.js'));
+
 
 app.post('/api/auth', function(req, res) {
   

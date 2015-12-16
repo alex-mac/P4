@@ -13,10 +13,10 @@
       <label for="password">Password</label>
       <input type="password" class="form-control" id="password" placeholder="Password" ng-model ="user.password">
     </div>
-      <a href="/forget-me-not">
-        Forgot your password?
-      </a>
       <hr>
+      <a ng-click="redirect()">
+        Don't have an account? Sign Up.
+      </a>
       <br />
       <br />
     <button type="submit" class="btn btn-primary" ng-click="close()">Log In</button>
