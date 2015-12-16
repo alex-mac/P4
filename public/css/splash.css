@@ -7,14 +7,14 @@
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  background-image: url("../images/edyn-web-hero-top.jpg");
+  background-image: url("../images/chalkboard-bg.jpg");
   background-position: 50% 50%;
   background-repeat: no-repeat;
   width: 100%;
   height: 100%;
 
-  filter: blur(10px);
-  -webkit-filter: blur(10px);
+  filter: blur(0px);
+  -webkit-filter: blur(0px);
   /*z-index: -1;*/
   position: fixed;
   top: 0;
@@ -42,7 +42,8 @@
 }
 
 .first {
-  color: white;
+  color: #FFFFFD;
+  margin: 200px 0;
   transition: color 1s;
   -webkit-transition: color 1s, 
 
@@ -51,7 +52,7 @@
 }
 
 .first.min {
-  color: black;
+  color: #303030;
   transition: color 1.5s;
   -webkit-transition: color 1.5s, 
 
@@ -64,17 +65,21 @@
   position: /*absolute*/;
 }
 
-.yellow {
-  padding: 20px;
-  margin-top: -20px;
-  background-color: #f9c000;
+.yellow-splash {
+  padding: 40px;
+  font-size: 18px;
+  line-height:24px;
+  letter-spacing: .2em;
+  font-weight: 100;
+/*  margin-top: -20px;
+*/  background-color: #f9c000;
   /*border: 1px solid #f9c000; 
   /*why does this remove the border??*/
   min-height: 100%;
 }
 
 #test {
-  color: black;
+  color: #303030;
   transition: color 1s;
   -webkit-transition: color 1s, 
 
@@ -83,5 +88,25 @@
 }
 
 #test.min {
-   color: white; 
+   color: #FFFFFD; 
 }
+
+.home p {
+  padding: 40px;
+  font-size: 16px;
+  line-height:24px;
+  letter-spacing: .2em;
+  font-weight: 100;
+}
+
+.home-img {
+  border: 20px solid #FFFFFD;
+  width: 90%;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+@media (min-width:500px){.home-img{
+
+  width: 400px;
+  }}

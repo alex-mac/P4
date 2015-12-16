@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-/*.area {
-  fill: #ffd27f;
-  stroke-width: 0;
-}*/
-
 .sun {
   fill: #ffd180;
   stroke-width: 0;
@@ -23,7 +17,6 @@
 }
 
 .container {
-  border: 1px solid black;
   padding: 0;
 }
 .axis text {
@@ -39,29 +32,6 @@
 }
 
 .x.axis path {
-=======
-
-
-.axis path, .axis line
-{
-    fill: none;
-    stroke: #777;
-    shape-rendering: crispEdges;
-}
-
-.axis text
-{
-    font-family: 'Arial';
-    font-size: 13px;
-}
-.tick
-{
-    stroke-dasharray: 1, 2;
-}
-.bar
-{
-    fill: FireBrick;
->>>>>>> 53258bb388fe7fa9ad5da7265f169c439ee82666
 }
 
 
