@@ -9,7 +9,7 @@ var path = require('path');
 
 var secret = "thesecretgarden";
 
-mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost:27017/gardens');
+mongoose.connect('mongodb://localhost:27017/gardens');
 
 
 app.use(express.static(path.join(__dirname, 'public')));
@@ -17,16 +17,16 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
 // This restricts anything in this path, except POST
-// app.use('/api/users', expressJWT( //request must go through the secret: secret and pass otherwise breaks
-//     {
-//       secret: secret
-//     }
-//   ).unless( // only allows us to POST or CREATE A USER without expressJWT
-//     {
-//       method: "POST",
-//     }
-//   )
-// );
+app.use('/api/users', expressJWT( //request must go through the secret: secret and pass otherwise breaks
+    {
+      secret: secret
+    }
+  ).unless( // only allows us to POST or CREATE A USER without expressJWT
+    {
+      method: "POST",
+    }
+  )
+);
 
 app.use('/api/gardens', expressJWT({secret: secret}));
 
@@ -46,7 +46,8 @@ app.use('/api/users', require('./controllers/user.js'));
 app.post('/api/auth', function(req, res) {
   
   User.findOne({email: req.body.email}, function(err, user) {
-    if (err || !user) return res.send({message: 'User not found'});
+    // if (err || !user) return res.send({message: 'User not found'});
+    if (err || !user) return err
     user.authenticated(req.body.password, function(err, result) {
       if (err || !result) return res.send({message: 'User not authenticated'});
 
