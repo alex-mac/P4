@@ -9,7 +9,8 @@ var path = require('path');
 
 var secret = "thesecretgarden";
 
-mongoose.connect('mongodb://localhost:27017/gardens');
+mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost:27017/gardens');
+
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
