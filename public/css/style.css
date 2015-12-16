@@ -1,8 +1,17 @@
-<<<<<<< HEAD
 /*.area {
   fill: #ffd27f;
   stroke-width: 0;
 }*/
+
+/*grid css*/
+.grid .tick {
+    stroke: lightgrey;
+    opacity: 0.7;
+}
+.grid path {
+      stroke-width: 0;
+}
+
 
 .sun {
   fill: #ffd180;
@@ -36,32 +45,6 @@
   fill: none;
   stroke: grey;
   shape-rendering: crispEdges;
-}
-
-.x.axis path {
-=======
-
-
-.axis path, .axis line
-{
-    fill: none;
-    stroke: #777;
-    shape-rendering: crispEdges;
-}
-
-.axis text
-{
-    font-family: 'Arial';
-    font-size: 13px;
-}
-.tick
-{
-    stroke-dasharray: 1, 2;
-}
-.bar
-{
-    fill: FireBrick;
->>>>>>> 53258bb388fe7fa9ad5da7265f169c439ee82666
 }
 
 

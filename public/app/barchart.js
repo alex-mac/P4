@@ -17,7 +17,6 @@ angular.module('graphView', [])
           "soil": [soilData, "Soil Nutrition", "#76ff03", "soil"]
         }
 
-
         var t;
         scope.graph;
         t = scope.graph;
@@ -74,6 +73,52 @@ angular.module('graphView', [])
           
          svg.attr('width', width);
 
+
+        // GRID LINES HORIZONTAL
+        svg.selectAll("line.horizontalGrid").data([1,2,3,4,5]).enter()
+          .append("line")
+          .attr({
+              "class":"horizontalGrid",
+              "x1" : 10,
+              "x2" : width,
+              "y1" : function(d){ return d*30;},
+              "y2" : function(d){ return d*30;},
+              "fill" : "none",
+              "shape-rendering" : "crispEdges",
+              "stroke" : "rgb(224, 224, 224)",
+              "stroke-width" : "1px"
+          });
+
+        // GRID LINES VERTICAL
+        svg.selectAll("line.verticalGrid").data([1,2,3,4,5]).enter()
+          .append("line")
+          .attr({
+              "class":"horizontalGrid",
+              "x1" : 10,
+              "x2" : width,
+              "y1" : function(d){ return d*30;},
+              "y2" : function(d){ return d*30;},
+              "fill" : "none",
+              "shape-rendering" : "crispEdges",
+              "stroke" : "rgb(224, 224, 224)",
+              "stroke-width" : "1px"
+          }); 
+
+        svg.selectAll("line.horizontalGrid").data([1,2,3,4,5]).enter()
+          .append("line")
+          .attr({
+              "class":"horizontalGrid",
+              "x1" : 10,
+              "x2" : width,
+              "y1" : function(d){ return d*30 - 30;},
+              "y2" : function(d){ return d*30 - 30;},
+              "fill" : "none",
+              "shape-rendering" : "crispEdges",
+              "stroke" : "rgb(224, 224, 224)",
+              "stroke-width" : "1px"
+          });
+
+
 // LINE GRAPH
           //dateRange = [new Date(data[0].date), new Date(data[data.length - 1].date)];
           
@@ -108,6 +153,9 @@ angular.module('graphView', [])
               .attr("stroke-width", 2)
               .attr("fill", "none");
 
+// 
+
+
 // BARS          
           // svg.selectAll('rect')
           // .data(data).enter()
@@ -129,6 +177,8 @@ angular.module('graphView', [])
           // .text(function (d) {
           //   return d.date + "(" + d.value + ")";
           // })
+
+
 
   // AXES
           
