@@ -113,6 +113,7 @@ angular.module('GardenCtrls', ['GardenServices', 'ngAnimate', 'ui.bootstrap'])
       $scope.userAction = function () {
         $http.post("/api/users", $scope.user).then(function success(res) {
           $http.post('api/auth', $scope.user).then(function success(res) {
+            console.log(res)
             Auth.saveToken(res.data.token, res.data.user);
             $location.path('/gardens');
           }, function error(res) {
