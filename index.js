@@ -7,8 +7,6 @@ var User = require('./models/user');
 var app = express();
 var path = require('path');
 
-var secret = "thesecretgarden";
-
 mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost:27017/gardens');
 
 
@@ -28,7 +26,7 @@ app.use('/api/users', expressJWT( //request must go through the secret: secret a
   )
 );
 
-app.use('/api/gardens', expressJWT({secret: secret}));
+app.use('/api/gardens', expressJWT({secret: process.env.SECRET}));
 
 app.use('/api/gardens', require('./controllers/gardens.js'));
 
