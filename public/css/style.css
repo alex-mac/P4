@@ -30,6 +30,15 @@
 
 }
 
+.temp {
+  fill: #ff8a80;
+  stroke-width: 0;
+}
+
+.graph-title {
+  fill: grey;
+}
+
 .container {
   padding: 0;
 }

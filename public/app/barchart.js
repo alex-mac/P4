@@ -11,7 +11,8 @@ angular.module('graphView', [])
           var params = {
             "sun": [sunData, "Sunlight", "#ff9100", "sun"],
             "water": [waterData, "Soil Moisture", "#00b0ff", "water"],
-            "soil": [soilData, "Soil Nutrition", "#76ff03", "soil"]
+            "soil": [soilData, "Soil Nutrition", "#76ff03", "soil"],
+            "temp": [tempData, "Temperature", "#ff1744", "temp"]
           }
 
           var t;
@@ -19,8 +20,8 @@ angular.module('graphView', [])
           t = scope.graph;
           scope.data = params[t][0];
   
-          var height = 250,
-          margin = {top: .2*height, bottom: .2*height, left: 30, right: 30},
+          var height = 350,
+          margin = {top: 35, bottom: 100, left: 35, right: 35},
           innerHeight = height - margin.top - margin.bottom,
           initWidth = d3.select('.container').node().offsetWidth - margin.left - margin.right;
 
@@ -79,7 +80,7 @@ angular.module('graphView', [])
             });
 
 // LINE GRAPH
-          //dateRange = [new Date(data[0].date), new Date(data[data.length - 1].date)];
+          var dateRange = [new Date(data[0].date), new Date(data[data.length - 1].date)];
           var x = d3.time.scale()
             .domain(d3.extent(data, function(d) { return new Date(d.date); }))
             .rangeRound([0, width]);
@@ -157,7 +158,7 @@ angular.module('graphView', [])
             .attr("transform", "translate(0, " + innerHeight + ")")
             .call(xAxis)
             .selectAll("text")
-            .attr("y", 0)
+            .attr("y", -5)
             .attr("x", -65)
             //.attr("dy", ".35em")
             .attr("transform", "rotate(-90)")
@@ -169,9 +170,16 @@ angular.module('graphView', [])
             .call(yAxis)
             .selectAll("text")
             .attr("y", 0)
-            .attr("x", -25)
+           // .attr("x", -25)
             //.attr("dy", ".35em")
-            .style("text-anchor", "start");
+            .style("text-anchor", "end");
+
+        svg.append("text")
+            .attr("x", (width / 2))             
+            .attr("y", 0 - (margin.top / 2))
+            .attr("text-anchor", "middle")
+            .attr('class', 'graph-title')  
+            .text(params[t][1] + ": " + dateRange[0].toDateString() + " - " + dateRange[1].toDateString());
         }
       })
     }
