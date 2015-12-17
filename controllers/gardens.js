@@ -34,10 +34,10 @@ router.put('/:id', function(req, res) {
 });
 
 router.delete('/:id', function(req,res) {
-  Gardens.findByIdAndRemove(req.param.id, function(err, garden) {
+  Gardens.findByIdAndRemove(req.params.id, function(err) {
     if (err) return res.send ({message: "Couldn't delete that particular garden"})
 
-    res.send('deleted!')
+    res.send({"message": "success"});
   })
 })
 

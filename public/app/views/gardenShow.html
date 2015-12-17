@@ -6,4 +6,7 @@
   <div d3-bars graph="soil"></div>
   <div d3-bars graph="temp"></div>
 </div>
- <a ng-click="deleteGarden(garden._id, $index)" class="btn btn-danger glyphicon glyphicon-trash pull-right"></a>
+
+<div ng-show="showData">
+  <a ng-click="deleteGarden()" class="btn btn-danger glyphicon glyphicon-trash pull-right"></a>
+</div> 

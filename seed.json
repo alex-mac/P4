@@ -1,6 +1,5 @@
 {
-	"undefined": "process.env.MONGOLAB_URI",
-	"dev": "process.env.MONGOLAB_URI",
-	"prod": "process.env.MONGOLAB_URI"
+	"undefined": "localhost/LOCAL_DB_NAME",
+	"dev": "localhost/DEV_DB_NAME",
+	"prod": "localhost/PROD_DB_NAME"
 }
-

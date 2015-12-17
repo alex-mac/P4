@@ -1,12 +1,9 @@
-<nav class="navbar navbar-default signup" role="navigation">
-	<div class="navbar-header">
-		<a class="navbar-brand" href="#">Garden</a>
-	</div>
-	<div class="collapse navbar-collapse navbar-ex1-collapse">
-		<ul class="nav navbar-nav navbar-right">
-			<li><a href="#">About</a></li>
-			<li><a href="#">Login</a></li>
-			<li><a href="#">Sign Up</a></li>
-		</ul>
-	</div>
-</nav>
+<div uib-dropdown class="dropdown text-right" ng-controller="NavCtrl">
+   <a href="#" uib-dropdown-toggle class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bars"></i></a>
+   <ul class="dropdown-menu">
+       <li><a href="/gardens">Home</a></li>
+       <li><a href="/gardens/new">New Garden</a></li>
+       <li><a href="#">Settings</a></li>
+       <li><a ng-click="logout()">Logout</a></li>
+   </ul>
+</div>
