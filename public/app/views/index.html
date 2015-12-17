@@ -3,6 +3,9 @@
   <header class="login-modal">
     <button ng-hide="isLoggedIn()" class="btn btn-primary login-btn font-2" ng-click="open()">Log In</button>
   </header>
+  <div ng-show"isLoggedIn()">
+    <div ng-include="'app/views/navbar.html'"></div>
+  </div>
 
   <h1 class="font-1 large chalk">Cultivate</h1>
 

@@ -1,13 +1,15 @@
 var express = require('express');
 var Data = require('../models/data');
 var router = express.Router();
-router.get('/', function(req, res){
+var Users = require("../models/user");
 
+
+router.get('/', function(req, res){
   Data.find(function(err, data) {
     if (err) { return res.send({message: 'An error occurred when finding any of this data'}) };
     console.log(data);
     res.send(data);
-  })
+  });
 });
 
 router.post('/', function(req, res) {

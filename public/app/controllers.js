@@ -5,36 +5,54 @@ angular.module('GardenCtrls', ['GardenServices', 'ngAnimate', 'ui.bootstrap'])
 .controller('GardenCtrl', ['$scope', 'Auth', 'GardenFactory', function($scope, Auth, GardenFactory) {
   $scope.gardens = [];
   user_id = window.localStorage["user.id"]
-  console.log(user_id);
+  // console.log(user_id);
 
-  if (user_id) {
-    GardenFactory.query(function success(data) {
-      // console.log(data);
-      $scope.gardens = data;
-      // $scope.gardens = ["blue", "Garden1", "Alex's secret garden"];
-    }, function error(data) {
-      console.log(data)
-    });
-  }
-
-  // to delete a garden that a user has
-  $scope.deleteGarden = function(id, gardenIdx) {
-    GardenFactory.delete({id: id}, function success(data) {
-      console.log(data)
-      $scope.gardens.splice(gardenIdx, 1);
-    }, function error(data) {
-      console.log(data);
-    });
-  }
+  GardenFactory.query(function success(data) {
+    // console.log(data);
+    $scope.gardens = data;
+    // $scope.gardens = ["blue", "Garden1", "Alex's secret garden"];
+  }, function error(data) {
+    console.log(data)
+  });
 }])
-.controller('ShowCtrl', ['$scope', '$routeParams', 'GardenFactory', function($scope, $routeParams, GardenFactory) {
+.controller('ShowCtrl', ['$scope', '$location', '$routeParams', 'GardenFactory', 'DataFactory', function($scope, $location, $routeParams, GardenFactory, DataFactory) {
   $scope.garden = {};
+  $scope.showData = false;
 
   GardenFactory.get({id: $routeParams.id}, function success(data) {
     $scope.garden = data;
   }, function error(data) {
     console.log(data);
   });
+
+  var shouldIShowThis = function() {
+    user_id = window.localStorage["user.id"]
+    console.log('function has run');
+    
+    DataFactory.get({user_id: user_id}, function success(data) {
+      console.log("this gets here");
+      $scope.showData = true;
+    }, function error(data) {
+      console.log(data);
+    });
+
+
+    // return token ? true : false;
+  }
+  shouldIShowThis();
+
+  // to delete a garden that a user has
+  $scope.deleteGarden = function() {
+      GardenFactory.delete({id: $routeParams.id}, function success(data) {
+      console.log("scope", $scope.garden._id);
+      console.log("routeParams", $routeParams.id);
+      console.log("data", data);
+      $location.path('/gardens');
+
+    }, function error(data) {
+      console.log(data);
+    });
+  }
 }])
 .controller('NewCtrl', ['$scope', '$location', 'GardenFactory', function($scope, $location, GardenFactory) {
   $scope.garden = {
@@ -43,7 +61,7 @@ angular.module('GardenCtrls', ['GardenServices', 'ngAnimate', 'ui.bootstrap'])
 
   $scope.createGarden = function() {
     GardenFactory.save($scope.garden, function success(data) {
-      $location.path('/');
+      $location.path('/gardens');
     }, function error(data) {
       console.log(data);
     });
