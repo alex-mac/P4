@@ -86,15 +86,6 @@ angular.module('GardenCtrls', ['GardenServices', 'ngAnimate', 'ui.bootstrap'])
       $location.path('/signup');
       $uibModalInstance.dismiss('close');//closes modal
     }
-
-
-  // $scope.close = function() {
-  //   $uibModalInstance.dismiss('close');
-  // };
-
-  // // $scope.login = function() {
-  // //   $uibModalInstance.close($scope.message);
-  // // }
   }])
   .controller('SignupCtrl', [
     '$scope',
@@ -112,6 +103,8 @@ angular.module('GardenCtrls', ['GardenServices', 'ngAnimate', 'ui.bootstrap'])
 
       $scope.userAction = function () {
         $http.post("/api/users", $scope.user).then(function success(res) {
+          console.log ("api/users was a success");
+          console.log(res)
           $http.post('api/auth', $scope.user).then(function success(res) {
             Auth.saveToken(res.data.token, res.data.user);
             $location.path('/gardens');
