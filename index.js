@@ -17,7 +17,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 // This restricts anything in this path, except POST
 app.use('/api/users', expressJWT( //request must go through the secret: secret and pass otherwise breaks
     {
-      secret: secret
+      secret: process.env.SECRET
     }
   ).unless( // only allows us to POST or CREATE A USER without expressJWT
     {
