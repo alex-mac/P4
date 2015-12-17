@@ -4,6 +4,9 @@ angular.module('GardenServices', ['ngResource'])
 .factory('GardenFactory', ['$resource', function($resource) {
   return $resource('http://localhost:3000/api/gardens/:id');
 }])
+.factory('DataFactory', ['$resource', function($resource) {
+  return $resource('http://localhost:3000/api/data/:id');
+}])
 .factory('Auth', ["$window", function($window){
     return {
         saveToken: function(token, user){

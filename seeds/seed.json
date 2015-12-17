@@ -1,5 +1,0 @@
-{
-	"undefined": "localhost/LOCAL_DB_NAME",
-	"dev": "localhost:27017/gardens",
-	"prod": "localhost/PROD_DB_NAME"
-}

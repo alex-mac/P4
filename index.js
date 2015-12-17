@@ -26,6 +26,8 @@ app.use('/api/users', expressJWT( //request must go through the secret: secret a
   )
 );
 
+app.use('/api/data', require('./controllers/data.js'));
+
 app.use('/api/gardens', expressJWT({secret: process.env.SECRET}));
 
 app.use('/api/gardens', require('./controllers/gardens.js'));
@@ -42,7 +44,6 @@ app.use('/api/users', require('./controllers/user.js'));
 
 
 app.post('/api/auth', function(req, res) {
-  
   User.findOne({email: req.body.email}, function(err, user) {
     // if (err || !user) return res.send({message: 'User not found'});
     if (err || !user) return err

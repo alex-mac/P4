@@ -9,7 +9,6 @@
 </div>
 
 <div class="well" ng-repeat="garden in gardens">
-  <h1>{{garden}}</h1>
+  <h1>{{garden.name}}</h1>
   <a ng-href="/gardens/{{garden._id}}">Permalink</a>
-  <a ng-click="deletegarden(garden, $index)" class="btn btn-danger glyphicon glyphicon-trash pull-right"></a>
 </div>
