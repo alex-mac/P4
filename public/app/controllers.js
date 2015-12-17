@@ -21,25 +21,35 @@ angular.module('GardenCtrls', ['GardenServices', 'ngAnimate', 'ui.bootstrap'])
 
   GardenFactory.get({id: $routeParams.id}, function success(data) {
     $scope.garden = data;
+    user_id = window.localStorage["user.id"]
+    if ($scope.garden.user_id == user_id) {
+        $scope.showData = true;
+    }
   }, function error(data) {
     console.log(data);
   });
-
-  var shouldIShowThis = function() {
-    user_id = window.localStorage["user.id"]
-    console.log('function has run');
     
-    DataFactory.get({user_id: user_id}, function success(data) {
-      console.log("this gets here");
-      $scope.showData = true;
-    }, function error(data) {
-      console.log(data);
+  DataFactory.query({garden_id: $scope.garden._id}, function success(data) {
+    $scope.sun = [];
+    data.forEach(function (obj) {
+      $scope.sun.push(obj.data.sun);
     });
 
+    $scope.water = [];
+    data.forEach(function (obj) {
+      $scope.water.push(obj.data.water);
+    });
 
-    // return token ? true : false;
-  }
-  shouldIShowThis();
+    $scope.soil = [];
+    data.forEach(function (obj) {
+      $scope.soil.push(obj.data.soil);
+    });
+
+    $scope.temp = [];
+    data.forEach(function (obj) {
+      $scope.temp.push(obj.data.temp);
+    });
+  });
 
   // to delete a garden that a user has
   $scope.deleteGarden = function() {
@@ -55,8 +65,11 @@ angular.module('GardenCtrls', ['GardenServices', 'ngAnimate', 'ui.bootstrap'])
   }
 }])
 .controller('NewCtrl', ['$scope', '$location', 'GardenFactory', function($scope, $location, GardenFactory) {
+  
+  user_id = window.localStorage["user.id"];
   $scope.garden = {
-    name: ''
+    name: '',
+    user_id: user_id
   };
 
   $scope.createGarden = function() {

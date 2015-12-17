@@ -3,16 +3,20 @@ angular.module('graphView', [])
     return {
       restrict: 'EA',
       scope: {
-        graph: '@'
+        graph: '@',
+        data: '='
       },
       link: function(scope, element, attrs) {
         d3Service.d3().then(function(d3) {
 
+        if (scope.data.length > 0) {
+
+
           var params = {
-            "sun": [sunData, "Sunlight", "#ff9100", "sun"],
-            "water": [waterData, "Soil Moisture", "#00b0ff", "water"],
-            "soil": [soilData, "Soil Nutrition", "#76ff03", "soil"],
-            "temp": [tempData, "Temperature", "#ff1744", "temp"]
+            "sun": [scope.data, "Sunlight", "#ff9100", "sun"],
+            "water": [scope.data, "Soil Moisture", "#00b0ff", "water"],
+            "soil": [scope.data, "Soil Nutrition", "#76ff03", "soil"],
+            "temp": [scope.data, "Temperature", "#ff1744", "temp"]
           }
 
           var t;
@@ -180,6 +184,12 @@ angular.module('graphView', [])
             .attr("text-anchor", "middle")
             .attr('class', 'graph-title')  
             .text(params[t][1] + ": " + dateRange[0].toDateString() + " - " + dateRange[1].toDateString());
+        }
+        } else {
+          d3.select(element[0])
+            .append("div")
+            .attr('class', 'no-data font-1')
+            .text("No data available");
         }
       })
     }
