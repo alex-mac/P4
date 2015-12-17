@@ -28,7 +28,7 @@ app.use('/api/users', expressJWT( //request must go through the secret: secret a
 
 app.use('/api/data', require('./controllers/data.js'));
 
-app.use('/api/gardens', expressJWT({secret: process.env.SECRET}));
+// app.use('/api/gardens', expressJWT({secret: process.env.SECRET}));
 
 app.use('/api/gardens', require('./controllers/gardens.js'));
 

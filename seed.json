@@ -1,6 +1,6 @@
 {
-	"undefined": "mongodb://localhost:27017/gardens",
-	"dev": "mongodb://localhost:27017/gardens",
+	"undefined": "process.env.MONGOLAB_URI",
+	"dev": "process.env.MONGOLAB_URI",
 	"prod": "process.env.MONGOLAB_URI"
 }
 

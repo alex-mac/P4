@@ -2,10 +2,10 @@ var TOKEN_STORAGE = 'gardens-token';
 
 angular.module('GardenServices', ['ngResource'])
 .factory('GardenFactory', ['$resource', function($resource) {
-  return $resource('http://localhost:3000/api/gardens/:id');
+  return $resource('/api/gardens/:id');
 }])
 .factory('DataFactory', ['$resource', function($resource) {
-  return $resource('http://localhost:3000/api/data/:id');
+  return $resource('/api/data/:id');
 }])
 .factory('Auth', ["$window", function($window){
     return {
