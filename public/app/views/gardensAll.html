@@ -8,13 +8,7 @@
    </ul>
 </div>
 
-<div class="row">
-  <div ng-repeat="garden in gardens | filter:search track by garden._id" class="col-xs-4 col-sm-4 col-md-4 col-lg-4">    
-    <div class="well">
-      <h3><a href="/api/airplanes/{{plane._id}}">{{plane.manufacturer}} <small>{{plane.model}}</small></a></h3>
-      <p>{{plane.engines}} Engines</p>
-       <a ng-click="deleteAirplane(plane._id, $index)" class="btn btn-danger glyphicon glyphicon-trash pull-right"></a>
-      <img src="{{plane.image}}" class="plane-img">
-    </div>  
-  </div>  
+<div class="well" ng-repeat="garden in gardens">
+  <h1>{{garden.name}}</h1>
+  <a ng-href="/gardens/{{garden._id}}">Permalink</a>
 </div>

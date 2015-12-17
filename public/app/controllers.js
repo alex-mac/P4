@@ -5,10 +5,13 @@ angular.module('GardenCtrls', ['GardenServices', 'ngAnimate', 'ui.bootstrap'])
 .controller('GardenCtrl', ['$scope', 'Auth', 'GardenFactory', function($scope, Auth, GardenFactory) {
   $scope.gardens = [];
   user_id = window.localStorage["user.id"]
+  console.log(user_id);
+
   if (user_id) {
     GardenFactory.query(function success(data) {
-      $scope.gardens = data.data;
-
+      // console.log(data);
+      $scope.gardens = data;
+      // $scope.gardens = ["blue", "Garden1", "Alex's secret garden"];
     }, function error(data) {
       console.log(data)
     });
@@ -17,6 +20,7 @@ angular.module('GardenCtrls', ['GardenServices', 'ngAnimate', 'ui.bootstrap'])
   // to delete a garden that a user has
   $scope.deleteGarden = function(id, gardenIdx) {
     GardenFactory.delete({id: id}, function success(data) {
+      console.log(data)
       $scope.gardens.splice(gardenIdx, 1);
     }, function error(data) {
       console.log(data);
