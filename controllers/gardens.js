@@ -3,6 +3,7 @@ var Gardens = require('../models/gardens');
 var router = express.Router();
 
 router.get('/', function(req, res){
+// need to find only user's gardens
   Gardens.find(function(err, gardens) {
     if (err) { return res.send({message: 'An error occurred when finding any gardens'}) }
 
@@ -19,6 +20,7 @@ router.post('/', function(req, res) {
 });
 
 router.get('/:id', function(req, res) {
+// need to allow only user's gardens
   Gardens.findById(req.params.id, function(err, garden) {
     if (err) return res.send({message: 'An error occurred when finding that garden'})
     res.send(garden)
