@@ -49,7 +49,7 @@ app.post('/api/auth', function(req, res) {
     user.authenticated(req.body.password, function(err, result) {
       if (err || !result) return res.send({message: 'User not authenticated'});
 
-      var token = jwt.sign(user, secret);
+      var token = jwt.sign(user, process.env.SECRET);
       res.send({user: user, token: token});
     });
   });

@@ -8,14 +8,8 @@
    </ul>
 </div>
 
-<div class="well">
-  <p>First Garden</p>
-</div>  
-
-<div class="well">
-  <p>Second Garden</p>
+<div class="well" ng-repeat="garden in gardens">
+  <h1>{{garden}}</h1>
+  <a ng-href="/gardens/{{garden._id}}">Permalink</a>
+  <a ng-click="deletegarden(garden, $index)" class="btn btn-danger glyphicon glyphicon-trash pull-right"></a>
 </div>
-<!-- <div class="container">
-  <div d3-bars graph="sun"></div>
-  <div d3-bars graph="soil"></div>
-</div> -->
