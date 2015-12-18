@@ -115,11 +115,12 @@ angular.module('GardenCtrls', ['GardenServices', 'ngAnimate', 'ui.bootstrap'])
     }
 
     $scope.actionName = 'Login';
-    $scope.userAction = function () {
+    $scope.userAction = function() {
       $http.post("/api/auth", $scope.user).then(function success(res) {
+        console.log(res)
         Auth.saveToken(res.data.token, res.data.user);
         $uibModalInstance.dismiss('close');//closes modal
-         $location.path('/gardens');
+        $location.path('/gardens');
       }, function error(res) {
         console.log(res.data);
       });
