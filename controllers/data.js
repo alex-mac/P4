@@ -5,9 +5,11 @@ var Users = require("../models/user");
 
 
 router.get('/', function(req, res){
-  Data.find(function(err, data) {
+  console.log('=========================');
+  console.log(req.query);
+  console.log('=========================');
+  Data.find({garden_id: req.query.garden_id}, function(err, data) {
     if (err) { return res.send({message: 'An error occurred when finding any of this data'}) };
-    console.log(data);
     res.send(data);
   });
 });
@@ -22,7 +24,7 @@ router.post('/', function(req, res) {
 });
 
 router.get('/:id', function(req, res) {
-  Data.findById(req.params.id, function(err, data) {
+  Data.find(req.params.id, function(err, data) {
     if (err) return res.send({message: 'An error occurred when finding that data'})
     res.send(data)
   })

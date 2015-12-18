@@ -11,6 +11,7 @@ angular.module('graphView', [])
 
         if (scope.data && scope.data.length > 0) {
 
+          scope.data = [].concat.apply([], scope.data);
 
           var params = {
             "sun": [scope.data, "Sunlight", "#ff9100", "sun"],
@@ -84,9 +85,9 @@ angular.module('graphView', [])
             });
 
 // LINE GRAPH
-          var dateRange = [new Date(data[0].date), new Date(data[data.length - 1].date)];
+          var dateRange = [new Date(data[0].time), new Date(data[data.length - 1].time)];
           var x = d3.time.scale()
-            .domain(d3.extent(data, function(d) { return new Date(d.date); }))
+            .domain(d3.extent(data, function(d) { return new Date(d.time); }))
             .rangeRound([0, width]);
 
           var y = d3.scale.linear()
@@ -94,15 +95,15 @@ angular.module('graphView', [])
             .range([innerHeight, 0]);
 
           var line = d3.svg.line()
-            .x(function (d, i) { return x(new Date(d.date)); })
+            .x(function (d, i) { return x(new Date(d.time)); })
             .y(function (d) { return y(d.value); })
-            .interpolate('cardinal');
+            .interpolate('linear');
 
           var area = d3.svg.area()
-            .x(function (d, i) { return x(new Date(d.date)); })
+            .x(function (d, i) { return x(new Date(d.time)); })
             .y(function (d) { return y(d.value); })
             .y0(innerHeight)
-            .interpolate('cardinal');
+            .interpolate('linear');
 
 
           svg.append("path")
