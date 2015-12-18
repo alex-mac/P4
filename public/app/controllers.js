@@ -87,7 +87,7 @@ angular.module('GardenCtrls', ['GardenServices', 'ngAnimate', 'ui.bootstrap'])
 
   $scope.logout = function () {
     Auth.removeToken();
-    location.reload();
+    location.path('/');
     // $scope.recipes = null;
     // $location.path('/');
   };
