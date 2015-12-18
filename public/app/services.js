@@ -5,7 +5,7 @@ angular.module('GardenServices', ['ngResource'])
   return $resource('/api/gardens/:id');
 }])
 .factory('DataFactory', ['$resource', function($resource) {
-  return $resource('/api/data/:id');
+  return $resource('/api/data/');
 }])
 .factory('Auth', ["$window", function($window){
     return {

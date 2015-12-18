@@ -21,35 +21,46 @@ angular.module('GardenCtrls', ['GardenServices', 'ngAnimate', 'ui.bootstrap'])
 
   GardenFactory.get({id: $routeParams.id}, function success(data) {
     $scope.garden = data;
+    console.log("Garden ID: " + $scope.garden._id);
     user_id = window.localStorage["user.id"]
     if ($scope.garden.user_id == user_id) {
         $scope.showData = true;
-    }
+    };
+
+    getData($scope.garden._id);
+
   }, function error(data) {
     console.log(data);
   });
     
-  DataFactory.query({garden_id: $scope.garden._id}, function success(data) {
-    $scope.sun = [];
-    data.forEach(function (obj) {
-      $scope.sun.push(obj.data.sun);
-    });
+  var getData = function (query) {
 
-    $scope.water = [];
-    data.forEach(function (obj) {
-      $scope.water.push(obj.data.water);
-    });
+      DataFactory.query({garden_id: query}, function success(data) {
+      
+      $scope.sunData = [];
+      data.forEach(function (obj) {
+        $scope.sunData.push(obj.data.sun);
+      });
 
-    $scope.soil = [];
-    data.forEach(function (obj) {
-      $scope.soil.push(obj.data.soil);
-    });
+      $scope.waterData = [];
+      data.forEach(function (obj) {
+        $scope.waterData.push(obj.data.water);
+      });
 
-    $scope.temp = [];
-    data.forEach(function (obj) {
-      $scope.temp.push(obj.data.temp);
-    });
-  });
+      $scope.soilData = [];
+      data.forEach(function (obj) {
+        $scope.soilData.push(obj.data.soil);
+      });
+
+      $scope.tempData = [];
+      data.forEach(function (obj) {
+        $scope.tempData.push(obj.data.temp);
+      });
+
+    }, function error(data) {
+      res.send(data);
+    })
+  };
 
   // to delete a garden that a user has
   $scope.deleteGarden = function() {
