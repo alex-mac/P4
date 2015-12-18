@@ -11,7 +11,7 @@ var UserSchema = new mongoose.Schema({
 UserSchema.set('toJSON', {
     transform: function(doc, ret, options) {
         var returnJson = {
-            id: ret._id,
+            _id: ret._id,
             email: ret.email,
             name: ret.name
         };
