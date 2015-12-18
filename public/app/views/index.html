@@ -1,8 +1,10 @@
 <div class="container">
+  <header class="login-modal" ng-hide="isLoggedIn()">
+    <button class="btn btn-primary login-btn font-2" ng-click="open()">Log In </button>
+    <FORM ACTION="/signup">
+     <INPUT TYPE="submit" class="btn login-btn btn-green font-2" VALUE="SignUp">
+    </FORM>
 
-  <header class="login-modal">
-    <button ng-hide="isLoggedIn()" class="btn btn-primary login-btn font-2" ng-click="open()">Log In</button>
-    <button ng-hide="isLoggedIn()" class="btn btn-primary btn-green font-2" href="/signup">Sign Up</button>
   </header>
   <div ng-show="isLoggedIn()">
     <div ng-include="'app/views/navbar.html'"></div>
