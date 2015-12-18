@@ -1,6 +1,6 @@
 [{
-    "user_id": "5670a8adc88821187a9a7168",
-    "garden_id": "5672fca84365abdd536adcc7",
+    "user_id": "5673655f097ad003002e0ea3",
+    "garden_id": "567368eccd8be203006c435e",
     "date": "2015-11-3",
     "data": {
         "sun": [{"time": "2015-11-03 02:00:00 -0800", "value": 14},
@@ -58,8 +58,8 @@
 },
 
 {
-"user_id": "5670a8adc88821187a9a7168",
-"garden_id": "5672fca84365abdd536adcc7",
+"user_id": "5673655f097ad003002e0ea3",
+"garden_id": "567368eccd8be203006c435e",
 "date": "2015-11-4",
 "data": {
     "sun": [{"time": "2015-11-04 00:00:00 -0800", "value": 53},
@@ -117,8 +117,8 @@
 },
 
 {
-"user_id": "5670a8adc88821187a9a7168",
-"garden_id": "5672fca84365abdd536adcc7",
+"user_id": "5673655f097ad003002e0ea3",
+"garden_id": "567368eccd8be203006c435e",
 "date": "2015-11-5",
 "data": {
     "sun": [{"time": "2015-11-05 00:00:00 -0800", "value": 39},
@@ -176,8 +176,8 @@
 },
 
 {
-"user_id": "5670a8adc88821187a9a7168",
-"garden_id": "5672fca84365abdd536adcc7",
+"user_id": "5673655f097ad003002e0ea3",
+"garden_id": "567368eccd8be203006c435e",
 "date": "2015-11-6",
 "data": {
     "sun": [{"time": "2015-11-06 00:00:00 -0800", "value": 39},
@@ -234,8 +234,8 @@
     }            
 },
 {
-"user_id": "5670a8adc88821187a9a7168",
-"garden_id": "5672fca84365abdd536adcc7",
+"user_id": "5673655f097ad003002e0ea3",
+"garden_id": "567368eccd8be203006c435e",
 "date": "2015-11-6",
 "data": {
     "sun": [{"time": "2015-11-07 00:00:00 -0800", "value": 16},
@@ -294,7 +294,7 @@
 
 {
 "user_id": "66f44430d5d70a81cdafa6c",
-"garden_id": "5672fca84365abdd536adcc7",
+"garden_id": "567368eccd8be203006c435e",
 "date": "2015-12-10",
 "data": {
     "sun": [{"time": "2015-12-10 00:00:00 -0800", "value": 26},
@@ -353,7 +353,7 @@
 
 {
 "user_id": "66f44430d5d70a81cdafa6c",
-"garden_id": "5672fca84365abdd536adcc7",
+"garden_id": "567368eccd8be203006c435e",
 "date": "2015-12-12",
 "data": {
     "sun": [
@@ -419,7 +419,7 @@
 
 {
 "user_id": "66f44430d5d70a81cdafa6c",
-"garden_id": "5672fca84365abdd536adcc7",
+"garden_id": "567368eccd8be203006c435e",
 "date": "2015-12-13",
 "data": {
     "sun": [
@@ -485,7 +485,7 @@
 
 {
 "user_id": "66f44430d5d70a81cdafa6c",
-"garden_id": "5672fca84365abdd536adcc7",
+"garden_id": "567368eccd8be203006c435e",
 "date": "2015-12-14",
 "data": {
     "sun": [
