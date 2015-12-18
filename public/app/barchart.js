@@ -9,7 +9,7 @@ angular.module('graphView', [])
       link: function(scope, element, attrs) {
         d3Service.d3().then(function(d3) {
 
-        if (scope.data.length > 0) {
+        if (scope.data && scope.data.length > 0) {
 
 
           var params = {

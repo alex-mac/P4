@@ -140,13 +140,16 @@ angular.module('GardenCtrls', ['GardenServices', 'ngAnimate', 'ui.bootstrap'])
         $http.post("/api/users", $scope.user).then(function success(res) {
           console.log ("api/users was a success");
           console.log(res)
-          $http.post('api/auth', $scope.user).then(function success(res) {
+          $http.post('/api/auth', $scope.user).then(function success(res) {
             Auth.saveToken(res.data.token, res.data.user);
+            console.log("login successful")
             $location.path('/gardens');
           }, function error(res) {
+            console.log("Error 1");
             console.log(res.data);
           })
-        }, function error() {
+        }, function error(res) {
+          console.log("Error 2");
           console.log(res.data);
         });
       }

@@ -7,7 +7,7 @@ var User = require('./models/user');
 var app = express();
 var path = require('path');
 
-mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost:27017/gardens');
+mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/gardens');
 
 
 app.use(express.static(path.join(__dirname, 'public')));
@@ -15,16 +15,16 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
 // This restricts anything in this path, except POST
-app.use('/api/users', expressJWT( //request must go through the secret: secret and pass otherwise breaks
-    {
-      secret: process.env.SECRET
-    }
-  ).unless( // only allows us to POST or CREATE A USER without expressJWT
-    {
-      method: "POST",
-    }
-  )
-);
+// app.use('/api/users', expressJWT( //request must go through the secret: secret and pass otherwise breaks
+//     {
+//       secret: process.env.SECRET
+//     }
+//   ).unless( // only allows us to POST or CREATE A USER without expressJWT
+//     {
+//       method: "POST",
+//     }
+//   )
+// );
 
 app.use('/api/data', require('./controllers/data.js'));
 
