@@ -7,7 +7,7 @@ var User = require('./models/user');
 var app = express();
 var path = require('path');
 
-mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost:27017/gardens');
+mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/gardens');
 
 
 app.use(express.static(path.join(__dirname, 'public')));

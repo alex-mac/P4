@@ -148,7 +148,7 @@ angular.module('GardenCtrls', ['GardenServices', 'ngAnimate', 'ui.bootstrap'])
             console.log("Error 1");
             console.log(res.data);
           })
-        }, function error() {
+        }, function error(res) {
           console.log("Error 2");
           console.log(res.data);
         });
