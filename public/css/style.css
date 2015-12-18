@@ -137,4 +137,21 @@
   color: white;
 }
 
+.text-field {
+  border: none;
+  background-color: none;
+  width: 90%;
+  margin: 0 auto;
+  border-top: none;
+  border-bottom: 1px solid grey;
+  border-radius: 0;
+  outline: none;
+  box-shadow: none;
+}
+
+@media (min-width:500px){.text-field{
+
+  width: 400px;
+  }}
+
 

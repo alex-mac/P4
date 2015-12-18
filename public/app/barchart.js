@@ -9,7 +9,9 @@ angular.module('graphView', [])
       link: function(scope, element, attrs) {
         d3Service.d3().then(function(d3) {
 
-        if (scope.data && scope.data.length > 0) {
+        // while (!scope.data) {
+        //   console.log("Loading");
+        // }
 
           scope.data = [].concat.apply([], scope.data);
 
@@ -186,12 +188,12 @@ angular.module('graphView', [])
             .attr('class', 'graph-title')  
             .text(params[t][1] + ": " + dateRange[0].toDateString() + " - " + dateRange[1].toDateString());
         }
-        } else {
-          d3.select(element[0])
-            .append("div")
-            .attr('class', 'no-data font-1')
-            .text("No data available");
-        }
+        // } else {
+        //   d3.select(element[0])
+        //     .append("div")
+        //     .attr('class', 'no-data font-1')
+        //     .text("No data available");
+        // }
       })
     }
   }

@@ -1,11 +1,14 @@
-<h1>A Garden</h1>
+<h1 class="font-1 text-center">{{garden.name}}</h1>
+<a class="btn btn-primary" href="/gardens">&larr; All Gardens</a>
 
-<div class="container">
+<div class="container" ng-if="loaded">
   <div d3-bars graph="sun" data="sunData"></div>
   <div d3-bars graph="water" data="waterData"></div>
   <div d3-bars graph="soil" data="soilData"></div>
   <div d3-bars graph="temp" data="tempData"></div>
 </div>
+
+<div ng-if="!loaded">Fetching Data...</div>
 
 <div ng-show="showData">
   <a ng-click="deleteGarden()" class="btn btn-danger glyphicon glyphicon-trash pull-right"></a>
