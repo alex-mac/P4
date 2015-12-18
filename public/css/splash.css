@@ -71,11 +71,17 @@
   line-height:24px;
   letter-spacing: .2em;
   font-weight: 100;
-/*  margin-top: -20px;
-*/  background-color: #f9c000;
-  /*border: 1px solid #f9c000; 
-  /*why does this remove the border??*/
-  min-height: 100%;
+  background-color: #f9c000;
+  min-height: 400px;
+  margin-top: 80px;
+}
+
+.yellow-splash h1 {
+  text-align: center;
+}
+
+.yellow-splash p {
+  padding-top: 70px;
 }
 
 #test {

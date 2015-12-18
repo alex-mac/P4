@@ -104,9 +104,7 @@ angular.module('GardenCtrls', ['GardenServices', 'ngAnimate', 'ui.bootstrap'])
 
   $scope.logout = function () {
     Auth.removeToken();
-    location.path('/');
-    // $scope.recipes = null;
-    // $location.path('/');
+    $location.path('/');
   };
 }])
 .controller("LoginCtrl", [
@@ -123,12 +121,12 @@ angular.module('GardenCtrls', ['GardenServices', 'ngAnimate', 'ui.bootstrap'])
     }
 
     $scope.actionName = 'Login';
-    $scope.userAction = function () {
+    $scope.userAction = function() {
       $http.post("/api/auth", $scope.user).then(function success(res) {
+        console.log(res)
         Auth.saveToken(res.data.token, res.data.user);
-        console.log(res.data.user.id)
-        $location.path('/gardens');
         $uibModalInstance.dismiss('close');//closes modal
+        $location.path('/gardens');
       }, function error(res) {
         console.log(res.data);
       });
