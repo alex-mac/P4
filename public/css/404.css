@@ -44,3 +44,20 @@ h1.large {
 	height: 300px;
 	margin: 0 auto;
 }
+
+#description {
+  border: none;
+  background-color: none;
+  width: 90%;
+  margin: 0 auto;
+  border-top: none;
+  border-bottom: 1px solid grey;
+  border-radius: 0;
+  outline: none;
+  box-shadow: none;
+}
+
+@media (min-width:500px){#description{
+
+  width: 400px;
+  }}

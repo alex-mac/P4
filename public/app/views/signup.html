@@ -9,16 +9,16 @@
       <h1> Sign Up </h1>
       <br />
       <div class="form-group" ng-hide="login">
-        <label for="name">Name</label>
-        <input type="name" class="form-control" name="name" id="name" placeholder="Enter your name" ng-model="user.name">
+        <label class="hidden" for="name">Name</label>
+        <input type="name" class="form-control text-field" name="name" id="name" placeholder="Name" ng-model="user.name">
       </div>
       <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" class="form-control" name="email" id="email" placeholder="Enter your email" ng-model="user.email">
+        <label class="hidden" for="email">Email</label>
+        <input type="email" class="form-control text-field" name="email" id="email" placeholder="Email Address" ng-model="user.email">
       </div>
       <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" class="form-control" name="password" id="password" placeholder="Decide on a secure password!" ng-model ="user.password">
+        <label class="hidden" for="password">Password</label>
+        <input type="password" class="form-control text-field" name="password" id="password" placeholder="Decide on a secure password!" ng-model ="user.password">
       </div>
       <button type="submit" class="btn btn-signup pull-right">Sign Up!</button>
     </form>
@@ -26,7 +26,7 @@
     <br />
     <p>
     <hr>
-      By signing up, you agree to the Terms of Service and Privacy Policy, including Cookie Use. Others will be able to find you by email or phone number when provided
+      By signing up, you agree to the Terms of Service and Privacy Policy, including Cookie Use. Others will be able to find you by email or phone number when provided.
     </p>
   </div>
   <div class="col-sm-2 col-md-3"></div>

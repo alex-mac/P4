@@ -2,15 +2,20 @@ angular.module('GardenCtrls', ['GardenServices', 'ngAnimate', 'ui.bootstrap'])
 .controller('HomeCtrl', ['$scope', function ($scope, Garden) {
 
 }])
-.controller('GardenCtrl', ['$scope', 'Auth', 'GardenFactory', function($scope, Auth, GardenFactory) {
+.controller('GardenCtrl', ['$scope', 'Auth', 'GardenFactory', 'UserFactory', function($scope, Auth, GardenFactory, UserFactory) {
   $scope.gardens = [];
   user_id = window.localStorage["user.id"]
-  // console.log(user_id);
 
   GardenFactory.query(function success(data) {
-    // console.log(data);
     $scope.gardens = data;
-    // $scope.gardens = ["blue", "Garden1", "Alex's secret garden"];
+    // data.forEach(function (obj) {
+    //   UserFactory.get({_id: obj._id}, function success(data) {
+    //     console.log(data);
+    //     obj.user_name = data.name;
+    //   }, function error() {
+
+    //   });
+    // });
   }, function error(data) {
     console.log(data)
   });
@@ -21,7 +26,6 @@ angular.module('GardenCtrls', ['GardenServices', 'ngAnimate', 'ui.bootstrap'])
 
   GardenFactory.get({id: $routeParams.id}, function success(data) {
     $scope.garden = data;
-    console.log("Garden ID: " + $scope.garden._id);
     user_id = window.localStorage["user.id"]
     if ($scope.garden.user_id == user_id) {
         $scope.showData = true;
@@ -56,6 +60,8 @@ angular.module('GardenCtrls', ['GardenServices', 'ngAnimate', 'ui.bootstrap'])
       data.forEach(function (obj) {
         $scope.tempData.push(obj.data.temp);
       });
+
+      $scope.loaded = true;
 
     }, function error(data) {
       res.send(data);
