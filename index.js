@@ -15,16 +15,16 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
 // This restricts anything in this path, except POST
-app.use('/api/users', expressJWT( //request must go through the secret: secret and pass otherwise breaks
-    {
-      secret: process.env.SECRET
-    }
-  ).unless( // only allows us to POST or CREATE A USER without expressJWT
-    {
-      method: "POST",
-    }
-  )
-);
+// app.use('/api/users', expressJWT( //request must go through the secret: secret and pass otherwise breaks
+//     {
+//       secret: process.env.SECRET
+//     }
+//   ).unless( // only allows us to POST or CREATE A USER without expressJWT
+//     {
+//       method: "POST",
+//     }
+//   )
+// );
 
 app.use('/api/data', require('./controllers/data.js'));
 
