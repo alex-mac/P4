@@ -8,14 +8,6 @@ angular.module('GardenCtrls', ['GardenServices', 'ngAnimate', 'ui.bootstrap'])
 
   GardenFactory.query(function success(data) {
     $scope.gardens = data;
-    // data.forEach(function (obj) {
-    //   UserFactory.get({_id: obj._id}, function success(data) {
-    //     console.log(data);
-    //     obj.user_name = data.name;
-    //   }, function error() {
-
-    //   });
-    // });
   }, function error(data) {
     console.log(data)
   });
@@ -30,7 +22,6 @@ angular.module('GardenCtrls', ['GardenServices', 'ngAnimate', 'ui.bootstrap'])
     if ($scope.garden.user_id == user_id) {
         $scope.showData = true;
     };
-
     getData($scope.garden._id);
 
   }, function error(data) {

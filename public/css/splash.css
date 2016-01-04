@@ -1,46 +1,3 @@
-.splash {
-  /*background-color: #f9c000;*/
-
-  /*display: block;*/
-  z-index: -1;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  background-image: url("../images/chalkboard-bg.jpg");
-  background-position: 50% 50%;
-  background-repeat: no-repeat;
-  width: 100%;
-  height: 100%;
-
-  filter: blur(0px);
-  -webkit-filter: blur(0px);
-  /*z-index: -1;*/
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 10;
-
-  transition: 1s linear;
-  -webkit-transition: 1s -webkit-filter linear;
-  -o-transition: 1s -o-filter linear;
-
-}
-
-.splash.min {
-  filter: blur(0px);
-  -webkit-filter: blur(0px);
-}
-
-.scrollable {
-  /*border: 2px solid red;*/
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  /*z-index: 20;*/
-}
-
 .first {
   color: #FFFFFD;
   margin: 200px 0;
@@ -60,9 +17,58 @@
   transition-delay: 1s;
 }
 
+.home p {
+  padding: 40px;
+  font-size: 16px;
+  line-height:24px;
+  letter-spacing: .2em;
+  font-weight: 100;
+}
+
+.home-img {
+  border: 20px solid #FFFFFD;
+  width: 90%;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
 .login-modal {
   float: right;
   position: /*absolute*/;
+}
+
+.scrollable {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+
+.splash {
+  z-index: -1;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-image: url("../images/chalkboard-bg.jpg");
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%;
+  filter: blur(0px);
+  -webkit-filter: blur(0px);
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 10;
+  transition: 1s linear;
+  -webkit-transition: 1s -webkit-filter linear;
+  -o-transition: 1s -o-filter linear;
+}
+
+.splash.min {
+  filter: blur(0px);
+  -webkit-filter: blur(0px);
 }
 
 .yellow-splash {
@@ -80,10 +86,6 @@
   text-align: center;
 }
 
-.yellow-splash p {
-  padding-top: 70px;
-}
-
 #test {
   color: #303030;
   transition: color 1s;
@@ -97,22 +99,6 @@
    color: #FFFFFD; 
 }
 
-.home p {
-  padding: 40px;
-  font-size: 16px;
-  line-height:24px;
-  letter-spacing: .2em;
-  font-weight: 100;
-}
-
-.home-img {
-  border: 20px solid #FFFFFD;
-  width: 90%;
-  margin: 0 auto;
-  box-sizing: border-box;
-}
-
 @media (min-width:500px){.home-img{
-
   width: 400px;
   }}

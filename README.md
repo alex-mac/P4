@@ -1,9 +1,14 @@
-# P4
-Final project for WDI
+# P4 
+The final project created as a capstone for the cohort. THis is a full-stack application with Angular.js for the front end, MongoDB for the backend, and self-created APIs for the users and .  Developed over the course of a week, P4 aims to encapsulate the main ideas of the cohort: full RESTful routing on the APIs, full CRUD functionality (without the ability to edit data because in practice, data should be generated), and semantic HTML and CSS.
 
-Screenshot
-Technologies
-Approach
+###Screenshot
+
+###Technologies Used
+
+We created this project using Angular.js, Node.js to connect the front end to the back end, D3 to visualize the data, and Mongo for the database.
+
+###Approach
+
 Installation instructions for any dependencies
 
 ###User stories
@@ -22,4 +27,15 @@ Installation instructions for any dependencies
 
 Wireframes – sketches of major views / interfaces in your application
 ?? Link to your pitch deck – documentation of your wireframes, user stories, and proposed architecture
+
 Unsolved problems / major hurdles
+
+
+An embedded screenshot of the app
+Explanations of the technologies used
+A couple paragraphs about the general approach you took
+Installation instructions for any dependencies
+
+Link to your wireframes – sketches of major views / interfaces in your application
+Link to your pitch deck – documentation of your wireframes, user stories, and proposed architecture
+Descriptions of any unsolved problems or major hurdles you had to overcome

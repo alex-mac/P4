@@ -8,11 +8,6 @@ angular.module('graphView', [])
       },
       link: function(scope, element, attrs) {
         d3Service.d3().then(function(d3) {
-
-        // while (!scope.data) {
-        //   console.log("Loading");
-        // }
-
           scope.data = [].concat.apply([], scope.data);
 
           var params = {
@@ -34,7 +29,6 @@ angular.module('graphView', [])
 
           var svg= d3.select(element[0])
             .append("svg")
-//          .attr('class', 'chart')
             .style('width', initWidth)
             .style('height', height)
             .append('g')
@@ -45,7 +39,6 @@ angular.module('graphView', [])
           window.onresize = function() {
             scope.$apply();
           };
-
 
           // Watch for resize event
           scope.$watch(function() {
@@ -121,29 +114,6 @@ angular.module('graphView', [])
             .attr("stroke-width", 2)
             .attr("fill", "none");
 
-
-// BARS          
-          // svg.selectAll('rect')
-          // .data(data).enter()
-          // .append('rect')
-          // .attr('class', 'rectangle')
-          // .attr('width', barWidth)
-          // .attr('height', 0)
-          // .attr('y', height - margin.top - margin.bottom )
-          // .attr('x', function(d,i) {
-          //   return i * barWidth;
-          // })
-          // .attr('fill', function(d) { return color(d.value); })
-          // .transition()
-          // .duration(1000)
-          // .attr('y', function(d) {
-          //   return height - margin.top - margin.bottom - d.value;
-          // })
-          // .attr('height', function(d) { return d.value; })
-          // .text(function (d) {
-          //   return d.date + "(" + d.value + ")";
-          // })
-
 // AXES
           var xAxis = d3.svg.axis()
             .scale(x)
@@ -167,7 +137,6 @@ angular.module('graphView', [])
             .selectAll("text")
             .attr("y", -5)
             .attr("x", -65)
-            //.attr("dy", ".35em")
             .attr("transform", "rotate(-90)")
             .style("text-anchor", "start");
 
@@ -177,8 +146,7 @@ angular.module('graphView', [])
             .call(yAxis)
             .selectAll("text")
             .attr("y", 0)
-           // .attr("x", -25)
-            //.attr("dy", ".35em")
+           
             .style("text-anchor", "end");
 
         svg.append("text")
@@ -188,12 +156,6 @@ angular.module('graphView', [])
             .attr('class', 'graph-title')  
             .text(params[t][1] + ": " + dateRange[0].toDateString() + " - " + dateRange[1].toDateString());
         }
-        // } else {
-        //   d3.select(element[0])
-        //     .append("div")
-        //     .attr('class', 'no-data font-1')
-        //     .text("No data available");
-        // }
       })
     }
   }
